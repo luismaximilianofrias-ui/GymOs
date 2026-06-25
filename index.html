@@ -2,1880 +2,980 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>GymOS — Control de Miembros</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MI CELL — Accesorios Tecnológicos</title>
+<meta name="description" content="Fundas, protectores, cargadores, auriculares y más accesorios para celulares. Envíos a todo el país.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;overscroll-behavior-x:none}
 :root{
-  --bg:#0D0D1A;--surface:#151526;--card:#1C1C35;--border:rgba(255,255,255,.07);
-  --violet:#7C3AED;--vlight:#A78BFA;--green:#10B981;--amber:#F59E0B;--red:#EF4444;
-  --blue:#3B82F6;--pink:#EC4899;
-  --text:#F8FAFC;--muted:#94A3B8;--subtle:#334155;
-  --nav-h:62px;
+  --orange:#FF7A1A;--orange-dark:#E85D00;--orange-light:#FFF1E2;
+  --ink:#0E0E10;--gray-900:#16161A;--gray-700:#3A3A42;--gray-600:#5B5B66;
+  --gray-400:#9A9AA5;--gray-200:#E7E7EB;--gray-100:#F3F3F6;--bg:#FFFFFF;
+  --surface:#FAFAFB;--green:#1AAE6F;--red:#E2412A;
+  --radius:16px;--radius-sm:10px;
+  --shadow-sm:0 2px 10px rgba(14,14,16,.06);
+  --shadow-md:0 12px 32px rgba(14,14,16,.10);
+  --shadow-lg:0 24px 64px rgba(14,14,16,.16);
+  --header-h:74px;
 }
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;overscroll-behavior-x:none;width:100%;position:relative}
-
-/* ═══════════════ TOP NAV ═══════════════ */
-#topNav{
-  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
-  background:rgba(13,13,26,.88);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;z-index:200;
-  transition:box-shadow .3s;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-#topNav.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.5)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--violet),#A855F7);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.nav-logo-text{font-size:18px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
-.nav-logo-text span{color:var(--vlight)}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{
-  padding:7px 14px;border-radius:9px;font-size:13px;font-weight:500;
-  color:var(--muted);cursor:pointer;border:none;background:none;font-family:inherit;
-  transition:all .15s;position:relative;
+h1,h2,h3,h4,.brand,.btn,.nav-link{font-family:'Plus Jakarta Sans',sans-serif}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,.8,.3,1),transform .6s cubic-bezier(.22,.8,.3,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ============ TOPBAR ============ */
+#announce{
+  background:var(--ink);color:#fff;font-size:12.5px;font-weight:500;
+  padding:9px 0;overflow:hidden;white-space:nowrap;position:relative;
 }
-.nav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
-.nav-link.active{color:var(--vlight);background:rgba(124,58,237,.15)}
-.nav-link .nb{
-  position:absolute;top:4px;right:6px;
-  background:var(--red);color:#fff;font-size:9px;font-weight:700;
-  padding:1px 5px;border-radius:20px;
+#announce .marquee{display:inline-flex;gap:48px;animation:scrollx 22s linear infinite}
+#announce span{display:inline-flex;align-items:center;gap:8px;opacity:.92}
+#announce span::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--orange)}
+@keyframes scrollx{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+header{
+  position:sticky;top:0;z-index:300;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--gray-200);
+  height:var(--header-h);transition:box-shadow .25s;
 }
-.nav-right{display:flex;align-items:center;gap:10px}
-.nav-user{display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 10px;border-radius:10px;transition:background .15s}
-.nav-user:hover{background:rgba(255,255,255,.06)}
-.nav-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
-.nav-name{font-size:13px;font-weight:600}
-.nav-role{font-size:10px;color:var(--muted)}
-.btn-logout{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s}
-.btn-logout:hover{color:var(--red);border-color:rgba(239,68,68,.4)}
-
-/* ═══════════════ LAYOUT ═══════════════ */
-#appWrap{display:flex;min-height:100vh;padding-top:var(--nav-h);overflow-x:hidden;width:100%}
-#sidebar{
-  width:220px;position:fixed;top:var(--nav-h);bottom:0;left:0;
-  background:var(--surface);border-right:1px solid var(--border);
-  padding:16px 12px;overflow-y:auto;z-index:100;
-  display:flex;flex-direction:column;
+header.scrolled{box-shadow:var(--shadow-sm)}
+.nav-wrap{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.5px}
+.brand-badge{
+  width:38px;height:38px;border-radius:50%;background:var(--orange);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-weight:800;font-style:italic;font-size:13px;color:var(--ink);
+  box-shadow:0 6px 16px rgba(255,122,26,.4);
 }
-.sid-label{font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;padding:8px 12px 5px}
-.sid-item{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 12px;border-radius:9px;cursor:pointer;
-  color:var(--muted);font-size:13px;font-weight:500;
-  transition:all .15s;margin-bottom:2px;
+.brand-text{font-style:italic}
+.brand-text span{color:var(--orange)}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-link{padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600;color:var(--gray-700);transition:all .18s}
+.nav-link:hover{background:var(--gray-100);color:var(--ink)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--gray-200);
+  background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  position:relative;transition:all .18s;
 }
-.sid-item:hover{background:rgba(124,58,237,.1);color:var(--vlight)}
-.sid-item.active{background:rgba(124,58,237,.18);color:var(--vlight);font-weight:600}
-.sid-icon{font-size:15px;width:18px;text-align:center}
-.sid-badge{margin-left:auto;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:20px}
-.sid-footer{margin-top:auto;padding-top:12px;border-top:1px solid var(--border)}
-
-#mainContent{margin-left:220px;padding:28px 32px;flex:1;min-height:calc(100vh - var(--nav-h));overflow-x:hidden;min-width:0}
-
-/* ═══════════════ PAGE SECTIONS ═══════════════ */
-.page-sec{display:none}.page-sec.active{display:block;overflow-x:hidden;max-width:100%}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
-.page-title{font-size:24px;font-weight:800;letter-spacing:-.5px}
-.page-sub{font-size:13px;color:var(--muted);margin-top:2px}
-
-/* ═══════════════ BUTTONS ═══════════════ */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .18s}
-.btn-primary{background:var(--violet);color:#fff}
-.btn-primary:hover{background:#6D28D9;transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,58,237,.35)}
-.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{border-color:var(--vlight);color:var(--vlight)}
-.btn-danger{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.25)}
-.btn-danger:hover{background:rgba(239,68,68,.22)}
-.btn-success{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.25)}
-.btn-success:hover{background:rgba(16,185,129,.22)}
-.btn-amber{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.25)}
-.btn-amber:hover{background:rgba(245,158,11,.22)}
-.btn-sm{padding:5px 11px;font-size:11px}
-.btn-xs{padding:3px 9px;font-size:11px;border-radius:7px}
-
-/* ═══════════════ STATS ═══════════════ */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:default}
-.stat-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.stat-card.c-violet::before{background:linear-gradient(90deg,var(--violet),#A855F7)}
-.stat-card.c-green::before{background:linear-gradient(90deg,var(--green),#34D399)}
-.stat-card.c-amber::before{background:linear-gradient(90deg,var(--amber),#FCD34D)}
-.stat-card.c-red::before{background:linear-gradient(90deg,var(--red),#F87171)}
-.stat-icon{position:absolute;right:18px;top:20px;font-size:26px;opacity:.12}
-.stat-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.stat-value{font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1}
-.stat-sub{font-size:11px;color:var(--muted);margin-top:5px}
-
-/* ═══════════════ TABLE ═══════════════ */
-.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:100%}
-table{width:100%;border-collapse:collapse}
-thead th{padding:12px 18px;text-align:left;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;background:rgba(255,255,255,.02);border-bottom:1px solid var(--border)}
-tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer}
-tbody tr:last-child{border-bottom:none}
-tbody tr:hover{background:rgba(124,58,237,.06)}
-td{padding:13px 18px;font-size:13px;vertical-align:middle}
-.member-info{display:flex;align-items:center;gap:10px}
-.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;background-size:cover;background-position:center}
-.member-name{font-weight:600;font-size:13px}
-.member-email{font-size:11px;color:var(--muted)}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
-.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
-.b-active{background:rgba(16,185,129,.12);color:var(--green)}
-.b-expiring{background:rgba(245,158,11,.12);color:var(--amber)}
-.b-expired{background:rgba(239,68,68,.12);color:var(--red)}
-.b-paused{background:rgba(148,163,184,.1);color:var(--muted)}
-.plan-tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:6px;background:rgba(124,58,237,.12);color:var(--vlight);border:1px solid rgba(124,58,237,.2)}
-.days-bar{display:flex;align-items:center;gap:8px}
-.days-track{flex:1;height:5px;background:var(--subtle);border-radius:3px;overflow:hidden;min-width:60px}
-.days-fill{height:100%;border-radius:3px}
-.days-text{font-size:11px;color:var(--muted);white-space:nowrap;min-width:48px}
-.row-actions{display:flex;gap:5px;justify-content:flex-end}
-
-/* ═══════════════ SEARCH/FILTERS ═══════════════ */
-.search-box{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 12px;min-width:220px;transition:border-color .2s}
-.search-box:focus-within{border-color:var(--violet)}
-.search-box input{background:none;border:none;outline:none;color:var(--text);font-size:13px;width:100%;font-family:inherit}
-.search-box input::placeholder{color:var(--muted)}
-.filters{display:flex;gap:6px;flex-wrap:wrap}
-.flt{padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s}
-.flt.active,.flt:hover{background:rgba(124,58,237,.14);border-color:var(--violet);color:var(--vlight)}
-.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
-.sec-title{font-size:16px;font-weight:700}
-
-/* ═══════════════ MODAL ═══════════════ */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(7px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
-.modal-ov.open{opacity:1;pointer-events:all}
-.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:540px;padding:30px;transform:translateY(14px) scale(.97);transition:transform .25s;max-height:90vh;overflow-y:auto}
-.modal-ov.open .modal{transform:none}
-.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.modal-title{font-size:18px;font-weight:700}
-.modal-close{width:30px;height:30px;border-radius:7px;background:var(--surface);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;transition:all .15s}
-.modal-close:hover{color:var(--text);border-color:var(--vlight)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fg{margin-bottom:14px}.fg.full{grid-column:1/-1}
-.fl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;display:block}
-.fi,.fs{width:100%;padding:9px 13px;background:var(--surface);border:1px solid var(--border);border-radius:9px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s}
-.fi:focus,.fs:focus{border-color:var(--violet)}
-.fs option{background:var(--surface)}
-textarea.fi{resize:vertical;min-height:80px}
-.modal-ft{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;border-top:1px solid var(--border);padding-top:18px}
-
-/* ═══════════════ PROFILE VIEW ═══════════════ */
-.profile-hd{display:flex;align-items:center;gap:18px;background:var(--surface);border-radius:14px;padding:18px;margin-bottom:20px;border:1px solid var(--border)}
-.profile-av{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;flex-shrink:0;background-size:cover;background-position:center;position:relative}
-.profile-name{font-size:20px;font-weight:800}
-.profile-plan{font-size:12px;color:var(--muted);margin-top:2px}
-.ring-wrap{text-align:center}
-svg.ring{transform:rotate(-90deg)}
-.ring-track{fill:none;stroke:var(--subtle);stroke-width:8}
-.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)}
-.ring-center{position:relative;display:inline-flex;align-items:center;justify-content:center}
-.ring-num{position:absolute;font-size:20px;font-weight:800;line-height:1;text-align:center}
-.ring-lbl{font-size:10px;color:var(--muted);margin-top:6px;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.info-item{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:13px}
-.info-item .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;font-weight:600}
-.info-item .val{font-size:14px;font-weight:700}
-
-/* ═══════════════ RENEW MODAL (months grid) ═══════════════ */
-.months-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.month-btn{
-  padding:10px 6px;border-radius:10px;border:1px solid var(--border);
-  background:var(--surface);color:var(--muted);cursor:pointer;
-  text-align:center;font-family:inherit;transition:all .15s;
+.icon-btn:hover{border-color:var(--orange);transform:translateY(-1px)}
+.icon-btn svg{width:19px;height:19px}
+.cart-count{
+  position:absolute;top:-5px;right:-5px;background:var(--orange);color:var(--ink);
+  font-size:10px;font-weight:800;min-width:18px;height:18px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;
+  transition:transform .25s;
 }
-.month-btn:hover{border-color:var(--violet);color:var(--vlight)}
-.month-btn.sel{background:rgba(124,58,237,.2);border-color:var(--violet);color:var(--vlight);font-weight:700}
-.month-btn .mnum{font-size:18px;font-weight:800;display:block;line-height:1}
-.month-btn .mlab{font-size:10px;margin-top:3px;display:block}
-
-/* ═══════════════ NEWS ═══════════════ */
-.news-grid{display:flex;flex-direction:column;gap:14px}
-.news-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .15s,box-shadow .15s}
-.news-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.3)}
-.news-img{width:100%;height:180px;object-fit:cover;background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:48px;color:var(--muted)}
-.news-body{padding:20px}
-.news-cat{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.news-title{font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.3}
-.news-text{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
-.news-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.news-date{font-size:11px;color:var(--muted)}
-.reactions{display:flex;gap:6px}
-.react-btn{
-  display:flex;align-items:center;gap:4px;
-  padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;
-  border:1px solid var(--border);background:var(--surface);
-  cursor:pointer;font-family:inherit;transition:all .15s;
-  color:var(--muted);
+.cart-count.bump{animation:bump .35s ease}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.4)}100%{transform:scale(1)}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 22px;border-radius:999px;font-size:14px;font-weight:700;
+  border:none;cursor:pointer;transition:all .2s cubic-bezier(.22,.8,.3,1);white-space:nowrap;
 }
-.react-btn:hover{border-color:var(--vlight);color:var(--vlight)}
-.react-btn.reacted{background:rgba(124,58,237,.15);border-color:var(--violet);color:var(--vlight)}
-.react-count{font-size:12px}
-/* admin news form */
-.news-form-card{background:var(--card);border:1px dashed rgba(124,58,237,.4);border-radius:16px;padding:22px;margin-bottom:18px}
+.btn-primary{background:var(--orange);color:var(--ink)}
+.btn-primary:hover{background:var(--orange-dark);color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,122,26,.35)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--gray-900);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--gray-200)}
+.btn-outline:hover{border-color:var(--ink)}
+.btn-block{width:100%}
+.btn-sm{padding:8px 16px;font-size:12.5px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.hamburger{display:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--gray-200);background:#fff;align-items:center;justify-content:center;cursor:pointer}
+.hamburger svg{width:20px;height:20px}
 
-/* ═══════════════ SUGGESTIONS ═══════════════ */
-.sug-list{display:flex;flex-direction:column;gap:10px}
-.sug-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;transition:transform .12s}
-.sug-card:hover{transform:translateX(3px)}
-.sug-icon{font-size:20px;flex-shrink:0;margin-top:2px}
-.sug-body{flex:1}
-.sug-head{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
-.sug-from{font-weight:600;font-size:13px}
-.sug-type{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:2px 7px;border-radius:5px}
-.t-sug{background:rgba(124,58,237,.12);color:var(--vlight)}
-.t-rep{background:rgba(239,68,68,.1);color:var(--red)}
-.t-com{background:rgba(16,185,129,.1);color:var(--green)}
-.sug-text{font-size:13px;color:var(--muted);line-height:1.5}
-.sug-date{font-size:11px;color:var(--subtle);margin-top:5px}
-.sug-status{flex-shrink:0;margin-top:2px}
-.stt{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px}
-.stt-pend{background:rgba(245,158,11,.1);color:var(--amber)}
-.stt-done{background:rgba(16,185,129,.1);color:var(--green)}
-.stt-rev{background:rgba(124,58,237,.1);color:var(--vlight)}
-
-/* ═══════════════ USER PROFILE PAGE ═══════════════ */
-.user-profile-wrap{max-width:680px;margin:0 auto}
-.user-profile-hero{
-  background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(16,185,129,.15));
-  border:1px solid var(--border);border-radius:20px;
-  padding:32px;margin-bottom:22px;
-  display:flex;align-items:center;gap:24px;
+/* ============ HERO ============ */
+.hero{position:relative;padding:64px 0 88px;overflow:hidden;background:var(--surface)}
+.hero::before{
+  content:'';position:absolute;top:-120px;right:-120px;width:480px;height:480px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,122,26,.18),transparent 70%);
 }
-.up-avatar-wrap{position:relative;flex-shrink:0}
-.up-avatar{width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:34px;border:3px solid var(--violet);background-size:cover;background-position:center}
-.up-avatar-btn{
-  position:absolute;bottom:0;right:0;
-  width:26px;height:26px;border-radius:50%;
-  background:var(--violet);border:2px solid var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;font-size:13px;
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;
+  background:var(--orange-light);color:var(--orange-dark);font-size:12.5px;font-weight:700;
+  letter-spacing:.3px;margin-bottom:20px;
 }
-.up-name{font-size:24px;font-weight:800;letter-spacing:-.5px}
-.up-plan{font-size:13px;color:var(--muted);margin-top:2px}
-.up-meta{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
-.up-meta-item{font-size:12px;color:var(--muted)}
-.up-meta-item strong{color:var(--text);font-weight:600}
-.up-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
-.up-card-title{font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.days-ring-row{display:flex;justify-content:center;padding:10px 0}
-
-/* ═══════════════ ALERTS ═══════════════ */
-.alert-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:15px 20px;display:flex;align-items:center;gap:14px;margin-bottom:8px;transition:transform .12s}
-.alert-card:hover{transform:translateX(3px)}
-.alert-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.alert-body{flex:1}
-.alert-name{font-weight:600;font-size:13px}
-.alert-msg{font-size:12px;color:var(--muted);margin-top:1px}
-
-/* ═══════════════ SETTINGS ═══════════════ */
-.set-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
-.set-title{font-size:15px;font-weight:700;margin-bottom:18px}
-.set-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
-.set-row:last-child{border-bottom:none}
-.set-lbl{font-size:13px;font-weight:500}
-.set-desc{font-size:11px;color:var(--muted);margin-top:2px}
-.toggle{width:42px;height:22px;background:var(--subtle);border-radius:11px;position:relative;cursor:pointer;transition:background .2s;border:none;flex-shrink:0}
-.toggle.on{background:var(--violet)}
-.toggle::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:left .18s}
-.toggle.on::after{left:23px}
-
-/* ═══════════════ TOAST ═══════════════ */
-#toastWrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px}
-.toast{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px 18px;display:flex;align-items:center;gap:9px;font-size:13px;font-weight:500;box-shadow:0 14px 36px rgba(0,0,0,.4);animation:toastIn .3s ease;min-width:220px}
-@keyframes toastIn{from{transform:translateX(50px);opacity:0}}
-
-/* ═══════════════ BACK TO TOP ═══════════════ */
-#backTop{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--violet);color:#fff;border:none;cursor:pointer;
-  width:42px;height:42px;border-radius:50%;font-size:18px;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:all .3s;z-index:150;
-  box-shadow:0 6px 20px rgba(124,58,237,.45);
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange)}
+.hero h1{font-size:50px;font-weight:800;line-height:1.06;letter-spacing:-1.5px;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--orange)}
+.hero p{font-size:16.5px;color:var(--gray-600);line-height:1.6;max-width:480px;margin-bottom:30px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.hstat b{display:block;font-size:24px;font-weight:800;letter-spacing:-.5px}
+.hstat span{font-size:12px;color:var(--gray-600);font-weight:500}
+.hero-visual{position:relative;height:420px}
+.float-card{
+  position:absolute;background:#fff;border-radius:20px;box-shadow:var(--shadow-lg);
+  padding:16px;display:flex;align-items:center;gap:12px;animation:floaty 5s ease-in-out infinite;
 }
-#backTop.show{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
-#backTop:hover{background:#6D28D9;transform:translateX(-50%) translateY(-3px)}
-
-/* ═══════════════ LOGIN ═══════════════ */
-#loginScreen{
-  position:fixed;inset:0;background:var(--bg);z-index:900;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
+.float-card svg,.float-card .ic-wrap{width:46px;height:46px;border-radius:14px;flex-shrink:0}
+.float-card b{display:block;font-size:13px}
+.float-card span{font-size:11px;color:var(--gray-600)}
+.fc1{top:6%;left:8%;animation-delay:0s}
+.fc2{top:42%;right:2%;animation-delay:1.2s}
+.fc3{bottom:6%;left:18%;animation-delay:2.1s}
+.hero-orb{
+  position:absolute;inset:0;margin:auto;width:300px;height:300px;border-radius:50%;
+  background:linear-gradient(135deg,var(--orange),#FFB070);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 30px 70px rgba(255,122,26,.4);
+  animation:floaty 6s ease-in-out infinite;
 }
-.login-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px;width:100%;max-width:420px;text-align:center}
-.login-logo{margin-bottom:28px}
-.login-logo .ico{width:56px;height:56px;background:linear-gradient(135deg,var(--violet),#A855F7);border-radius:16px;display:inline-flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:12px}
-.login-logo h1{font-size:26px;font-weight:800;letter-spacing:-.5px}
-.login-logo h1 span{color:var(--vlight)}
-.login-sub{font-size:14px;color:var(--muted);margin-bottom:28px}
-.login-tabs{display:flex;background:var(--surface);border-radius:11px;padding:4px;margin-bottom:24px;border:1px solid var(--border)}
-.login-tab{flex:1;padding:8px;border-radius:8px;border:none;background:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s}
-.login-tab.active{background:var(--violet);color:#fff}
-.fg-login{text-align:left;margin-bottom:14px}
-.fl-login{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;display:block}
-.fi-login{width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
-.fi-login:focus{border-color:var(--violet)}
-.login-hint{font-size:11px;color:var(--muted);margin-top:16px}
+.hero-orb span{font-style:italic;font-weight:800;font-size:34px;color:var(--ink)}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 
-/* ═══════════════ MISC ═══════════════ */
-.empty-state{text-align:center;padding:52px 20px;color:var(--muted)}
-.empty-icon{font-size:44px;margin-bottom:10px;opacity:.35}
-.sep{height:1px;background:var(--border);margin:20px 0}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--subtle);border-radius:3px}
+/* ============ STRIPS ============ */
+.perks{background:var(--ink);padding:20px 0}
+.perks-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.perk{display:flex;align-items:center;gap:10px;color:#fff;font-size:13px;font-weight:600}
+.perk svg{width:18px;height:18px;color:var(--orange);flex-shrink:0}
 
-/* ═══════════════ MEMBER CARDS (mobile) ═══════════════ */
-.member-cards{display:none;flex-direction:column;gap:10px}
-.mc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.mc:active{transform:scale(.98)}
-.mc:hover{box-shadow:0 6px 20px rgba(0,0,0,.25)}
-.mc-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.mc-info{flex:1;min-width:0}
-.mc-name{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mc-email{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mc-mid{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
-.mc-bot{display:flex;gap:6px}
+/* ============ SECTIONS ============ */
+section{padding:72px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px}
+.sec-head h2{font-size:32px;font-weight:800;letter-spacing:-1px}
+.sec-head p{color:var(--gray-600);font-size:14.5px;margin-top:6px}
 
-/* ═══════════════ HAMBURGER ═══════════════ */
-#navHamburger{
-  display:none;width:36px;height:36px;border-radius:9px;
-  background:var(--surface);border:1px solid var(--border);
-  align-items:center;justify-content:center;cursor:pointer;
-  font-size:17px;color:var(--text);flex-shrink:0;
+/* categories */
+.cat-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:14px}
+.cat-card{
+  background:var(--surface);border:1px solid var(--gray-200);border-radius:var(--radius);
+  padding:22px 14px;text-align:center;cursor:pointer;transition:all .22s cubic-bezier(.22,.8,.3,1);
 }
+.cat-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.cat-card.active{background:var(--ink);border-color:var(--ink)}
+.cat-card.active .cat-name,.cat-card.active .cat-count{color:#fff}
+.cat-ic{
+  width:48px;height:48px;border-radius:14px;margin:0 auto 12px;background:var(--orange-light);
+  display:flex;align-items:center;justify-content:center;color:var(--orange-dark);
+}
+.cat-card.active .cat-ic{background:var(--orange);color:var(--ink)}
+.cat-ic svg{width:22px;height:22px}
+.cat-name{font-size:12.5px;font-weight:700;line-height:1.3}
+.cat-count{font-size:11px;color:var(--gray-400);margin-top:3px;display:block}
 
-/* ═══════════════ BOTTOM NAV (mobile) ═══════════════ */
-#bottomNav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;
-  background:rgba(13,13,26,.97);backdrop-filter:blur(16px);
-  border-top:1px solid var(--border);
-  z-index:200;
-}
-.bnav-inner{display:flex;height:58px;align-items:stretch;padding-bottom:env(safe-area-inset-bottom,0px)}
-.bnav-item{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;cursor:pointer;border:none;background:none;color:var(--muted);
-  font-family:inherit;font-size:9px;font-weight:600;letter-spacing:.3px;
-  text-transform:uppercase;padding:6px 2px;position:relative;transition:color .15s;
-}
-.bnav-item.active{color:var(--vlight)}
-.bnav-icon{font-size:19px;line-height:1}
-.bnav-dot{
-  position:absolute;top:6px;right:calc(50% - 15px);
-  width:7px;height:7px;border-radius:50%;background:var(--red);
-  border:2px solid var(--bg);
-}
+/* product grid + filters */
+.shop-layout{display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:flex-start}
+.filters-panel{background:var(--surface);border:1px solid var(--gray-200);border-radius:var(--radius);padding:22px;position:sticky;top:calc(var(--header-h) + 16px)}
+.filters-panel h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px;color:var(--gray-700)}
+.f-group{margin-bottom:24px}
+.f-check{display:flex;align-items:center;gap:9px;padding:7px 0;font-size:13.5px;color:var(--gray-700);cursor:pointer}
+.f-check input{accent-color:var(--orange);width:16px;height:16px;cursor:pointer}
+.price-range{width:100%;accent-color:var(--orange);margin-top:8px}
+.price-vals{display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-top:4px}
+.f-clear{font-size:12.5px;font-weight:700;color:var(--orange-dark);cursor:pointer}
+#filterToggleBtn{display:none}
 
-/* ═══════════════ MOBILE DRAWER ═══════════════ */
-#drawerOverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:190;backdrop-filter:blur(3px);display:none}
-#drawerOverlay.open{display:block}
-#mobileDrawer{
-  position:fixed;top:0;left:0;bottom:0;width:78%;max-width:290px;
-  background:var(--surface);border-right:1px solid var(--border);
-  z-index:195;transform:translateX(-100%);
-  transition:transform .28s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;
-  padding-top:max(20px,env(safe-area-inset-top));
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.search-box{
+  display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--gray-200);
+  border-radius:999px;padding:11px 18px;flex:1;max-width:380px;transition:border-color .2s;
 }
-#mobileDrawer.open{transform:translateX(0)}
-.drawer-logo{padding:16px 18px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
-.drawer-nav{padding:10px;flex:1;overflow-y:auto}
-.drawer-footer{padding:12px;border-top:1px solid var(--border)}
-
-/* ═══════════════ TABLET ═══════════════ */
-@media(max-width:1024px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  #sidebar{display:none}
-  #mainContent{margin-left:0}
+.search-box:focus-within{border-color:var(--orange)}
+.search-box svg{width:16px;height:16px;color:var(--gray-400);flex-shrink:0}
+.search-box input{border:none;outline:none;background:none;font-size:13.5px;width:100%;font-family:inherit}
+.sort-select{
+  padding:10px 16px;border-radius:999px;border:1px solid var(--gray-200);background:#fff;
+  font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;color:var(--gray-700);
 }
+.result-count{font-size:12.5px;color:var(--gray-600);font-weight:600}
 
-/* ═══════════════ MOBILE ═══════════════ */
-@media(max-width:640px){
-  :root{--nav-h:54px}
-  #topNav{padding:0 14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;
+  transition:all .25s cubic-bezier(.22,.8,.3,1);cursor:pointer;display:flex;flex-direction:column;position:relative;
+}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:transparent}
+.card-media{aspect-ratio:1/1;background:var(--surface);position:relative;overflow:hidden}
+.card-media svg{width:100%;height:100%;transition:transform .35s}
+.card:hover .card-media svg{transform:scale(1.06) rotate(-2deg)}
+.card-badge{
+  position:absolute;top:12px;left:12px;font-size:10.5px;font-weight:800;padding:5px 10px;
+  border-radius:999px;letter-spacing:.2px;text-transform:uppercase;z-index:2;
+}
+.bdg-nuevo{background:var(--ink);color:#fff}
+.bdg-oferta{background:var(--red);color:#fff}
+.bdg-mas-vendido{background:var(--orange);color:var(--ink)}
+.card-quick{
+  position:absolute;bottom:12px;right:12px;width:38px;height:38px;border-radius:50%;
+  background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);
+  opacity:0;transform:translateY(6px);transition:all .2s;z-index:2;border:none;cursor:pointer;
+}
+.card:hover .card-quick{opacity:1;transform:translateY(0)}
+.card-quick svg{width:16px;height:16px}
+.card-body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card-cat{font-size:11px;color:var(--gray-400);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.card-name{font-size:14.5px;font-weight:700;line-height:1.3}
+.card-model{font-size:12px;color:var(--gray-600)}
+.card-rating{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--gray-600)}
+.card-rating svg{width:12px;height:12px;color:var(--orange)}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px}
+.card-price{display:flex;align-items:baseline;gap:7px}
+.price-now{font-size:17px;font-weight:800;letter-spacing:-.3px}
+.price-old{font-size:12.5px;color:var(--gray-400);text-decoration:line-through}
+.add-btn{
+  width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;border:none;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;
+}
+.add-btn:hover{background:var(--orange);color:var(--ink);transform:scale(1.08)}
+.add-btn svg{width:16px;height:16px}
+.stock-low{font-size:10.5px;color:var(--red);font-weight:700;margin-top:2px}
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray-600)}
+.empty-state svg{width:54px;height:54px;color:var(--gray-200);margin:0 auto 16px}
+
+/* ============ BANNER ============ */
+.banner{
+  background:linear-gradient(120deg,var(--ink),#26262C);border-radius:24px;padding:56px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;color:#fff;overflow:hidden;position:relative;
+}
+.banner::after{content:'';position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,26,.3),transparent 70%)}
+.banner h3{font-size:28px;font-weight:800;letter-spacing:-.6px;margin-bottom:10px;max-width:420px}
+.banner p{color:rgba(255,255,255,.65);font-size:14px;max-width:420px;margin-bottom:22px}
+
+/* ============ FOOTER ============ */
+footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.foot-brand p{color:rgba(255,255,255,.6);font-size:13.5px;line-height:1.7;margin:16px 0 18px;max-width:280px}
+.foot-col h5{font-size:13px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.85)}
+.foot-col a{display:block;color:rgba(255,255,255,.6);font-size:13.5px;margin-bottom:11px;transition:color .15s}
+.foot-col a:hover{color:var(--orange)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:rgba(255,255,255,.45)}
+.social-row{display:flex;gap:10px;margin-top:6px}
+.social-row a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.social-row a:hover{background:var(--orange);color:var(--ink)}
+.social-row svg{width:15px;height:15px}
+
+/* ============ CART DRAWER ============ */
+.overlay{position:fixed;inset:0;background:rgba(14,14,16,.5);z-index:400;opacity:0;visibility:hidden;transition:opacity .25s}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;background:#fff;z-index:401;
+  display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.22,.8,.3,1);
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:22px 24px;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between}
+.drawer-head h3{font-size:18px;font-weight:800}
+.drawer-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--gray-200);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.drawer-close svg{width:15px;height:15px}
+.drawer-body{flex:1;overflow-y:auto;padding:20px 24px}
+.cart-line{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--gray-100)}
+.cart-line-media{width:68px;height:68px;border-radius:12px;background:var(--surface);flex-shrink:0;overflow:hidden}
+.cart-line-info{flex:1;min-width:0}
+.cart-line-name{font-size:13.5px;font-weight:700}
+.cart-line-model{font-size:11.5px;color:var(--gray-600);margin-bottom:6px}
+.qty-stepper{display:flex;align-items:center;gap:10px}
+.qty-stepper button{width:26px;height:26px;border-radius:8px;border:1px solid var(--gray-200);background:none;cursor:pointer;font-size:14px;line-height:1}
+.qty-stepper span{font-size:13px;font-weight:700;min-width:18px;text-align:center}
+.cart-line-price{font-size:13.5px;font-weight:800;text-align:right;white-space:nowrap}
+.cart-line-remove{font-size:11px;color:var(--red);cursor:pointer;font-weight:600;margin-top:6px;display:inline-block}
+.drawer-empty{text-align:center;padding:60px 10px;color:var(--gray-600)}
+.drawer-empty svg{width:50px;height:50px;color:var(--gray-200);margin:0 auto 14px}
+.drawer-foot{border-top:1px solid var(--gray-200);padding:20px 24px;background:var(--surface)}
+.drawer-row{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px;color:var(--gray-600)}
+.drawer-total{display:flex;justify-content:space-between;font-size:17px;font-weight:800;margin:10px 0 16px}
+
+/* ============ MODALS ============ */
+.modal-overlay{position:fixed;inset:0;background:rgba(14,14,16,.55);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .25s;padding:20px}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{background:#fff;border-radius:22px;max-width:880px;width:100%;max-height:88vh;overflow-y:auto;transform:scale(.94) translateY(10px);transition:transform .28s cubic-bezier(.22,.8,.3,1);position:relative}
+.modal-overlay.open .modal{transform:scale(1) translateY(0)}
+.modal-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid var(--gray-200);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5}
+.modal-close svg{width:15px;height:15px}
+.pd-grid{display:grid;grid-template-columns:1fr 1fr}
+.pd-media{background:var(--surface);padding:40px;display:flex;align-items:center;justify-content:center;border-radius:22px 0 0 22px}
+.pd-media svg{width:280px;height:280px}
+.pd-info{padding:40px 40px 40px 32px}
+.pd-cat{font-size:11.5px;color:var(--orange-dark);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.pd-name{font-size:24px;font-weight:800;margin:8px 0 4px;letter-spacing:-.4px}
+.pd-model{font-size:13.5px;color:var(--gray-600);margin-bottom:14px}
+.pd-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+.pd-price{font-size:28px;font-weight:800}
+.pd-desc{font-size:13.5px;color:var(--gray-600);line-height:1.7;margin-bottom:20px}
+.pd-meta{display:flex;gap:18px;margin-bottom:22px;flex-wrap:wrap}
+.pd-meta-item{font-size:12px;color:var(--gray-700)}
+.pd-meta-item b{display:block;font-size:13px;color:var(--ink)}
+.pd-actions{display:flex;gap:12px;align-items:center}
+
+.checkout-modal{max-width:520px;padding:36px}
+.checkout-modal h3{font-size:22px;font-weight:800;margin-bottom:6px}
+.checkout-modal p.sub{font-size:13px;color:var(--gray-600);margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:7px;color:var(--gray-700)}
+.field input,.field textarea,.field select{
+  width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--gray-200);
+  font-size:13.5px;font-family:inherit;outline:none;transition:border-color .15s;background:#fff;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--orange)}
+.pay-options{display:flex;gap:10px}
+.pay-opt{flex:1;border:1.5px solid var(--gray-200);border-radius:10px;padding:11px;text-align:center;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s}
+.pay-opt.active{border-color:var(--orange);background:var(--orange-light);color:var(--orange-dark)}
+.order-summary{background:var(--surface);border-radius:12px;padding:16px;margin:18px 0;font-size:13px}
+.order-summary .row{display:flex;justify-content:space-between;padding:4px 0;color:var(--gray-600)}
+.order-summary .row.total{font-weight:800;color:var(--ink);font-size:15px;padding-top:8px;border-top:1px solid var(--gray-200);margin-top:6px}
+.success-box{text-align:center;padding:20px 0}
+.success-ic{width:72px;height:72px;border-radius:50%;background:rgba(26,174,111,.12);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.success-ic svg{width:32px;height:32px}
+
+/* toast */
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:#fff;
+  padding:14px 22px;border-radius:999px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;
+  z-index:600;opacity:0;visibility:hidden;transition:all .3s cubic-bezier(.22,.8,.3,1);box-shadow:var(--shadow-lg);
+}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.toast svg{width:16px;height:16px;color:var(--orange)}
+
+.mobile-drawer{
+  position:fixed;top:0;left:0;height:100%;width:280px;background:#fff;z-index:401;
+  transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,.8,.3,1);padding:24px;
+}
+.mobile-drawer.open{transform:translateX(0)}
+.mobile-drawer .nav-link{display:block;padding:13px 4px;border-bottom:1px solid var(--gray-100)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1080px){
+  .cat-grid{grid-template-columns:repeat(4,1fr)}
+  .shop-layout{grid-template-columns:1fr}
+  .filters-panel{position:static;display:none;margin-bottom:8px}
+  .filters-panel.open{display:block}
+  #filterToggleBtn{display:inline-flex}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{height:280px;order:-1}
+  .hero h1{font-size:38px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .pd-grid{grid-template-columns:1fr}
+  .pd-media{border-radius:22px 22px 0 0}
+}
+@media (max-width:720px){
   .nav-links{display:none}
-  .nav-name,.nav-role{display:none}
-  .nav-right{gap:6px}
-  #navHamburger{display:flex}
-
-  /* iOS zoom fix: font-size < 16px dispara zoom automático en Safari */
-  input, select, textarea,
-  .fi, .fs, .fi-login, .search-box input {
-    font-size:16px !important;
-  }
-
-  #mainContent{
-    padding:16px 14px;
-    padding-bottom:calc(68px + env(safe-area-inset-bottom,0px) + 8px);
-    margin-left:0;
-    overflow-x:hidden;
-    overscroll-behavior-x:none;
-    touch-action:pan-y;
-  }
-
-  .stats-grid{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-  .stat-card{padding:14px 12px;border-radius:12px}
-  .stat-value{font-size:26px}
-  .stat-icon{font-size:18px;right:10px;top:13px}
-  .stat-label{font-size:10px;margin-bottom:4px}
-  .stat-sub{font-size:10px}
-
-  /* hide table, show cards */
-  .table-wrap table{display:none}
-  .member-cards{display:flex}
-
-  .topbar{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:18px}
-  .topbar .btn-primary{width:100%;justify-content:center}
-  .topbar .search-box{width:100%}
-
-  .page-title{font-size:20px}
-  .sec-title{font-size:14px}
-
-  .filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x}
-  .filters::-webkit-scrollbar{display:none}
-  .flt{white-space:nowrap;flex-shrink:0}
-
-  .modal-ov{align-items:flex-end}
-  .modal{border-radius:20px 20px 0 0;max-width:100%;max-height:93vh;padding:22px 18px}
-
-  .months-grid{grid-template-columns:repeat(3,1fr)}
-
-  #bottomNav{display:block}
-
-  .news-card .news-img{height:120px}
-  .news-body{padding:14px}
-
-  .user-profile-hero{flex-direction:column;align-items:flex-start;gap:14px;padding:16px}
-  .up-name{font-size:20px}
-  .info-grid{grid-template-columns:1fr 1fr}
-
-  .form-row{grid-template-columns:1fr}
-  .fg.full{grid-column:1}
-
-  .alert-card{flex-wrap:wrap;gap:8px}
-
-  #backTop{
-    bottom:calc(66px + env(safe-area-inset-bottom,0px));
-    left:auto;right:14px;
-    transform:translateY(16px);
-  }
-  #backTop.show{transform:translateY(0)}
-  #backTop:hover{transform:translateY(-2px)}
-
-  .sug-card{flex-wrap:wrap}
-  .sug-status{width:100%;display:flex;align-items:center;gap:8px;margin-top:4px}
-  .sug-status .btn{padding:4px 10px}
-
-  .set-card .form-row{grid-template-columns:1fr}
+  .hamburger{display:flex}
+  .perks-row{justify-content:flex-start;overflow-x:auto;gap:24px}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .banner{flex-direction:column;text-align:center;padding:36px 24px}
+  .banner h3,.banner p{max-width:100%}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .hero h1{font-size:32px}
+  .container{padding:0 16px}
+  section{padding:48px 0}
+}
+@media (max-width:480px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .cat-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-ctas .btn{flex:1}
+  .foot-grid{grid-template-columns:1fr}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .search-box{max-width:none}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ LOGIN SCREEN ═══ -->
-<div id="loginScreen">
-  <div class="login-box">
-    <div class="login-logo">
-      <div class="ico">💪</div>
-      <h1>Gym<span>OS</span></h1>
-    </div>
-    <p class="login-sub">Ingresá a tu cuenta para continuar</p>
-    <div class="login-tabs">
-      <button class="login-tab active" onclick="setLoginTab('admin',this)">Admin</button>
-      <button class="login-tab" onclick="setLoginTab('user',this)">Miembro</button>
-    </div>
-    <div id="loginAdminFields">
-      <div class="fg-login"><label class="fl-login">Usuario</label><input class="fi-login" id="loginUser" value="admin" placeholder="admin"></div>
-      <div class="fg-login"><label class="fl-login">Contraseña</label><input class="fi-login" id="loginPass" type="password" value="1234" placeholder="••••"></div>
-    </div>
-    <div id="loginUserFields" style="display:none">
-      <div class="fg-login"><label class="fl-login">Email</label><input class="fi-login" id="loginEmail" placeholder="tu@email.com"></div>
-      <div class="fg-login"><label class="fl-login">Contraseña</label><input class="fi-login" id="loginPassU" type="password" placeholder="••••"></div>
-    </div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:11px" onclick="doLogin()">Ingresar</button>
-    <p class="login-hint">Demo admin: usuario <strong>admin</strong> / contraseña <strong>1234</strong><br>Demo miembro: email <strong>lucas@mail.com</strong> / contraseña <strong>1234</strong></p>
-  </div>
-</div>
+<div id="announce"><div class="marquee">
+  <span>Envíos a todo el país</span><span>Servicio técnico avanzado</span><span>Pagos con tarjeta y transferencia</span><span>Garantía en todos los productos</span>
+  <span>Envíos a todo el país</span><span>Servicio técnico avanzado</span><span>Pagos con tarjeta y transferencia</span><span>Garantía en todos los productos</span>
+</div></div>
 
-<!-- ═══ TOP NAV ═══ -->
-<nav id="topNav" style="display:none">
-  <div style="display:flex;align-items:center;gap:10px">
-    <button id="navHamburger" onclick="toggleDrawer()">☰</button>
-    <a class="nav-logo">
-      <div class="nav-logo-icon">💪</div>
-      <span class="nav-logo-text">Gym<span>OS</span></span>
+<header id="siteHeader">
+  <div class="container nav-wrap">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a href="#home" class="brand">
+      <span class="brand-badge">MC</span>
+      <span class="brand-text">MI <span>CELL</span></span>
     </a>
-  </div>
-  <div class="nav-links" id="navLinks"></div>
-  <div class="nav-right">
-    <div class="nav-user" id="navUserBtn">
-      <div class="nav-avatar" id="navAvatar"></div>
-      <div><div class="nav-name" id="navName"></div><div class="nav-role" id="navRole"></div></div>
+    <nav class="nav-links">
+      <a class="nav-link" href="#home">Inicio</a>
+      <a class="nav-link" href="#categorias">Categorías</a>
+      <a class="nav-link" href="#catalogo">Productos</a>
+      <a class="nav-link" href="#nosotros">Nosotros</a>
+      <a class="nav-link" href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <button class="icon-btn" id="cartToggle" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
     </div>
-    <button class="btn-logout" onclick="doLogout()">Salir</button>
   </div>
-</nav>
+</header>
 
-<!-- ═══ APP WRAP ═══ -->
-<div id="appWrap" style="display:none">
-  <aside id="sidebar"></aside>
-  <main id="mainContent"></main>
+<div class="mobile-drawer" id="mobileDrawer">
+  <a class="nav-link" href="#home">Inicio</a>
+  <a class="nav-link" href="#categorias">Categorías</a>
+  <a class="nav-link" href="#catalogo">Productos</a>
+  <a class="nav-link" href="#nosotros">Nosotros</a>
+  <a class="nav-link" href="#contacto">Contacto</a>
+  <a class="nav-link" href="admin.html">Panel de administración</a>
 </div>
 
-<!-- ═══ BACK TO TOP ═══ -->
-<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<main>
 
-<!-- ═══ MOBILE DRAWER ═══ -->
-<div id="drawerOverlay" onclick="toggleDrawer()"></div>
-<div id="mobileDrawer">
-  <div class="drawer-logo">
-    <div class="nav-logo-icon">💪</div>
-    <span class="nav-logo-text">Gym<span style="color:var(--vlight)">OS</span></span>
-  </div>
-  <div class="drawer-nav" id="drawerNav"></div>
-  <div class="drawer-footer">
-    <button class="btn-logout" style="width:100%;text-align:center;padding:10px" onclick="doLogout()">Cerrar sesión</button>
-  </div>
-</div>
-
-<!-- ═══ BOTTOM NAV ═══ -->
-<div id="bottomNav">
-  <div class="bnav-inner" id="bottomNavInner"></div>
-</div>
-
-<!-- ═══ TOAST WRAP ═══ -->
-<div id="toastWrap"></div>
-
-<!-- ═══ MODALS ═══ -->
-<!-- Add/Edit member -->
-<div class="modal-ov" id="modalMember">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-title" id="mmTitle">Nuevo Miembro</div><button class="modal-close" onclick="closeModal('modalMember')">✕</button></div>
-    <div class="form-row">
-      <div class="fg"><label class="fl">Nombre</label><input class="fi" id="fName" placeholder="Juan"></div>
-      <div class="fg"><label class="fl">Apellido</label><input class="fi" id="fLast" placeholder="Pérez"></div>
-      <div class="fg"><label class="fl">Email</label><input class="fi" id="fEmail" type="email" placeholder="juan@email.com"></div>
-      <div class="fg"><label class="fl">Teléfono</label><input class="fi" id="fPhone" placeholder="+54 381..."></div>
-      <div class="fg"><label class="fl">Fecha de nacimiento</label><input class="fi" id="fBirth" type="date"></div>
-      <div class="fg"><label class="fl">Estado</label>
-        <select class="fs" id="fStatus"><option value="active">Activo</option><option value="paused">Pausado</option><option value="expired">Vencido</option></select>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow reveal">Tienda de accesorios tecnológicos</div>
+      <h1 class="reveal">Equipá tu celular con <em>estilo</em> y protección real</h1>
+      <p class="reveal">Fundas, protectores, cargadores y auriculares seleccionados para que tu equipo esté siempre listo. Envíos a todo el país y servicio técnico avanzado.</p>
+      <div class="hero-ctas reveal">
+        <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+        <a href="#nosotros" class="btn btn-outline">Conocer la tienda</a>
       </div>
-      <div class="fg"><label class="fl">Plan base</label>
-        <select class="fs" id="fPlan"><option value="Mensual">Mensual</option><option value="Trimestral">Trimestral</option><option value="Semestral">Semestral</option><option value="Anual">Anual</option></select>
-      </div>
-      <div class="fg"><label class="fl">Inicio membresía</label><input class="fi" id="fStart" type="date"></div>
-      <div class="fg full"><label class="fl">Notas</label><input class="fi" id="fNotes" placeholder="Lesión, horario preferido..."></div>
-      <div class="fg full"><label class="fl">Contraseña (acceso miembro)</label><input class="fi" id="fPass" type="password" placeholder="••••"></div>
-    </div>
-    <div class="modal-ft">
-      <button class="btn btn-ghost" onclick="closeModal('modalMember')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveMember()">Guardar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Renew modal -->
-<div class="modal-ov" id="modalRenew">
-  <div class="modal" style="max-width:440px">
-    <div class="modal-hd"><div class="modal-title">Renovar Membresía</div><button class="modal-close" onclick="closeModal('modalRenew')">✕</button></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Elegí por cuántos meses querés renovar:</p>
-    <div class="months-grid" id="monthsGrid"></div>
-    <div id="renewSummary" style="margin-top:16px;padding:12px 16px;background:var(--surface);border-radius:10px;border:1px solid var(--border);font-size:13px;display:none"></div>
-    <div class="modal-ft">
-      <button class="btn btn-ghost" onclick="closeModal('modalRenew')">Cancelar</button>
-      <button class="btn btn-success" id="btnConfirmRenew" disabled onclick="confirmRenew()">Confirmar Renovación</button>
-    </div>
-  </div>
-</div>
-
-<!-- Profile view -->
-<div class="modal-ov" id="modalProfile">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-title">Perfil del Miembro</div><button class="modal-close" onclick="closeModal('modalProfile')">✕</button></div>
-    <div id="profileContent"></div>
-    <div class="modal-ft" id="profileFt"></div>
-  </div>
-</div>
-
-<!-- News compose (admin) -->
-<div class="modal-ov" id="modalNews">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-title">Nueva Publicación</div><button class="modal-close" onclick="closeModal('modalNews')">✕</button></div>
-    <div class="fg full"><label class="fl">Categoría</label>
-      <select class="fs" id="nCat">
-        <option value="Novedades">📢 Novedades</option>
-        <option value="Eventos">🎉 Eventos</option>
-        <option value="Horarios">🕐 Horarios</option>
-        <option value="Salud">💪 Salud & Tips</option>
-        <option value="Mantenimiento">🔧 Mantenimiento</option>
-      </select>
-    </div>
-    <div class="fg full"><label class="fl">Título</label><input class="fi" id="nTitle" placeholder="Título de la publicación"></div>
-    <div class="fg full"><label class="fl">Contenido</label><textarea class="fi" id="nBody" placeholder="Escribí el contenido..." style="min-height:100px"></textarea></div>
-    <div class="fg full"><label class="fl">Emoji / ícono</label><input class="fi" id="nEmoji" placeholder="🏋️" maxlength="2" style="max-width:80px"></div>
-    <div class="modal-ft">
-      <button class="btn btn-ghost" onclick="closeModal('modalNews')">Cancelar</button>
-      <button class="btn btn-primary" onclick="publishNews()">Publicar</button>
-    </div>
-  </div>
-</div>
-
-<!-- User edit profile -->
-<div class="modal-ov" id="modalUserEdit">
-  <div class="modal">
-    <div class="modal-hd"><div class="modal-title">Editar mi Perfil</div><button class="modal-close" onclick="closeModal('modalUserEdit')">✕</button></div>
-    <div class="form-row">
-      <div class="fg"><label class="fl">Nombre</label><input class="fi" id="ueName"></div>
-      <div class="fg"><label class="fl">Apellido</label><input class="fi" id="ueLast"></div>
-      <div class="fg"><label class="fl">Email</label><input class="fi" id="ueEmail" type="email"></div>
-      <div class="fg"><label class="fl">Teléfono</label><input class="fi" id="uePhone"></div>
-      <div class="fg full"><label class="fl">Fecha de nacimiento</label><input class="fi" id="ueBirth" type="date" oninput="calcAge()"></div>
-      <div class="fg full"><label class="fl">Edad calculada</label><input class="fi" id="ueAge" readonly style="color:var(--muted);cursor:default"></div>
-    </div>
-    <div class="modal-ft">
-      <button class="btn btn-ghost" onclick="closeModal('modalUserEdit')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveUserProfile()">Guardar</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// ════════════════════════════════════════════════════
-// DATA LAYER
-// ════════════════════════════════════════════════════
-const AC = ['#7C3AED','#10B981','#F59E0B','#EF4444','#3B82F6','#EC4899','#14B8A6','#8B5CF6'];
-function gc(s){let n=0;for(const c of s)n+=c.charCodeAt(0);return AC[n%AC.length]}
-function ini(a,b){return(a[0]||'')+(b[0]||'')}
-function dAgo(d){const dt=new Date();dt.setDate(dt.getDate()-d);return dt.toISOString().split('T')[0]}
-function today(){return new Date().toISOString().split('T')[0]}
-function calcAgeFrom(dob){if(!dob)return null;const b=new Date(dob),n=new Date();let a=n.getFullYear()-b.getFullYear();const m=n.getMonth()-b.getMonth();if(m<0||(m===0&&n.getDate()<b.getDate()))a--;return a}
-
-let _rawDB = null;
-try { _rawDB = JSON.parse(localStorage.getItem('gymos_db') || 'null'); } catch(e) { _rawDB = null; }
-// Migrate old emoji keys to safe string keys
-if(_rawDB && _rawDB.news) {
-  _rawDB.news.forEach(n => {
-    if(!n.reactions) n.reactions = {'like':0,'strong':0,'party':0};
-    // migrate old emoji keys
-    const r = n.reactions;
-    if(r['❤️'] !== undefined){ r['like'] = (r['like']||0) + r['❤️']; delete r['❤️']; }
-    if(r['💪'] !== undefined){ r['strong'] = (r['strong']||0) + r['💪']; delete r['💪']; }
-    if(r['🎉'] !== undefined){ r['party'] = (r['party']||0) + r['🎉']; delete r['🎉']; }
-    if(!n.userReacted) n.userReacted = {};
-  });
-}
-let DB = _rawDB || {
-  members:[
-    {id:1,name:'Lucas',last:'Gómez',email:'lucas@mail.com',phone:'+54 381 111-1111',birth:'1995-03-14',plan:'Mensual',start:dAgo(5),status:'active',notes:'',pass:'1234',photo:''},
-    {id:2,name:'Martina',last:'López',email:'marti@mail.com',phone:'+54 381 222-2222',birth:'1998-07-22',plan:'Trimestral',start:dAgo(25),status:'active',notes:'Prefiere tarde',pass:'1234',photo:''},
-    {id:3,name:'Santiago',last:'Pereira',email:'santi@mail.com',phone:'+54 381 333-3333',birth:'1990-11-05',plan:'Mensual',start:dAgo(26),status:'active',notes:'',pass:'1234',photo:''},
-    {id:4,name:'Valentina',last:'Ríos',email:'vale@mail.com',phone:'+54 381 444-4444',birth:'1993-04-30',plan:'Semestral',start:dAgo(3),status:'active',notes:'Instructora interna',pass:'1234',photo:''},
-    {id:5,name:'Nicolás',last:'Torres',email:'nico@mail.com',phone:'+54 381 555-5555',birth:'1988-09-18',plan:'Mensual',start:dAgo(35),status:'expired',notes:'',pass:'1234',photo:''},
-    {id:6,name:'Sofía',last:'Medina',email:'sofi@mail.com',phone:'+54 381 666-6666',birth:'2000-01-10',plan:'Anual',start:dAgo(10),status:'active',notes:'',pass:'1234',photo:''},
-    {id:7,name:'Tomás',last:'Acosta',email:'tomas@mail.com',phone:'+54 381 777-7777',birth:'1996-06-25',plan:'Mensual',start:dAgo(28),status:'active',notes:'Lesión en hombro',pass:'1234',photo:''},
-    {id:8,name:'Florencia',last:'Díaz',email:'flor@mail.com',phone:'+54 381 888-8888',birth:'1994-12-03',plan:'Trimestral',start:dAgo(80),status:'active',notes:'',pass:'1234',photo:''},
-  ],
-
-  news:[
-    {id:1,cat:'Novedades',emoji:'🏋️',title:'¡Nuevas máquinas en sala principal!',body:'Incorporamos 3 nuevas máquinas de musculación de última generación. Ya están disponibles para todos los socios.',date:'2026-06-01',reactions:{'like':4,'strong':7,'party':2},userReacted:{}},
-    {id:2,cat:'Horarios',emoji:'🕐',title:'Cambio de horario de clases grupales',body:'A partir del lunes, las clases de spinning pasan a las 7:30 AM y 19:00 hs. El resto de los horarios se mantienen sin cambios.',date:'2026-05-28',reactions:{'like':2,'strong':3,'party':1},userReacted:{}},
-    {id:3,cat:'Salud',emoji:'💧',title:'Tip de hidratación',body:'Recordá tomar al menos 2 litros de agua durante el día y siempre tener tu botella en el entrenamiento. La hidratación es clave para el rendimiento.',date:'2026-05-20',reactions:{'like':8,'strong':5,'party':0},userReacted:{}},
-  ],
-
-  suggestions:[
-    {id:1,memberId:1,type:'sug',text:'Estaría bueno que haya más espejos en la sala de pesas.',date:'2026-06-02',status:'pend'},
-    {id:2,memberId:2,type:'rep',text:'El vestuario de mujeres tiene un canilla que gotea hace varios días.',date:'2026-06-04',status:'rev'},
-    {id:3,memberId:3,type:'com',text:'Excelente atención del personal, muy buen ambiente en el gym!',date:'2026-06-05',status:'done'},
-  ],
-
-  nextId:{m:9,n:4,s:4}
-};
-
-// ════════════════════════════════════════════════════
-// SUPABASE CONFIG
-// ════════════════════════════════════════════════════
-const SUPA_URL = 'https://dkhlkdqyhkjykzwfyjgj.supabase.co';
-const SUPA_KEY = 'sb_publishable_i_FVM973dSbz27ZWG9reAw_dYfizARU';
-const SUPA_TABLE = 'gymos_data';
-let SUPA_ROW_ID = null; // se carga al iniciar
-
-async function supaFetch(method, body){
-  const url = SUPA_ROW_ID
-    ? `${SUPA_URL}/rest/v1/${SUPA_TABLE}?id=eq.${SUPA_ROW_ID}`
-    : `${SUPA_URL}/rest/v1/${SUPA_TABLE}`;
-  const res = await fetch(url, {
-    method,
-    headers:{
-      'apikey': SUPA_KEY,
-      'Authorization': 'Bearer ' + SUPA_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': method==='POST' ? 'return=representation' : 'return=minimal'
-    },
-    body: body ? JSON.stringify(body) : undefined
-  });
-  if(!res.ok){
-    const err = await res.text();
-    throw new Error('Supabase error: ' + err);
-  }
-  const text = await res.text();
-  return text ? JSON.parse(text) : null;
-}
-
-async function cargarSupabase(){
-  try{
-    showToast('Conectando...','info');
-    const rows = await supaFetch('GET');
-    if(rows && rows.length > 0){
-      SUPA_ROW_ID = rows[0].id;
-      // Si la fila tiene datos reales, usarlos
-      if(rows[0].data && Object.keys(rows[0].data).length > 0){
-        DB = rows[0].data;
-        localStorage.setItem('gymos_db', JSON.stringify(DB));
-        console.log('Datos cargados desde Supabase');
-      } else {
-        // Fila vacía: subir los datos locales
-        await supaFetch('PATCH', { data: DB });
-        console.log('Datos iniciales subidos a Supabase');
-      }
-    } else {
-      // No hay filas: crear una
-      const created = await supaFetch('POST', { data: DB });
-      if(created && created[0]) SUPA_ROW_ID = created[0].id;
-      console.log('Fila creada en Supabase');
-    }
-    showToast('Conectado ✓','success');
-  } catch(err){
-    console.error('Error Supabase:', err);
-    showToast('Sin conexión, usando datos locales','warning');
-  }
-}
-
-async function saveDB(){
-  localStorage.setItem('gymos_db', JSON.stringify(DB));
-  try{
-    if(SUPA_ROW_ID){
-      await supaFetch('PATCH', { data: DB });
-    }
-  } catch(err){
-    console.error('Error guardando en Supabase:', err);
-    showToast('Error al guardar en la nube','error');
-  }
-}
-
-// ════════════════════════════════════════════════════
-// STATUS HELPERS
-// ════════════════════════════════════════════════════
-const PLAN_DAYS={Mensual:30,Trimestral:90,Semestral:180,Anual:365};
-function getStatus(m){
-  if(m.status==='paused')return'paused';
-  const rem=getRemaining(m);
-  if(rem<=0)return'expired';
-  if(rem<=7)return'expiring';
-  return'active';
-}
-function getRemaining(m){
-  const days=m.totalDays||PLAN_DAYS[m.plan]||30;
-  const end=new Date(m.start+'T12:00:00');end.setDate(end.getDate()+days);
-  return Math.max(0,Math.ceil((end-new Date())/86400000));
-}
-function getEndDate(m){
-  const days=m.totalDays||PLAN_DAYS[m.plan]||30;
-  const d=new Date(m.start+'T12:00:00');d.setDate(d.getDate()+days);
-  return d.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric'});
-}
-const SL={active:'Activo',expiring:'Por vencer',expired:'Vencido',paused:'Pausado'};
-const SC={active:'b-active',expiring:'b-expiring',expired:'b-expired',paused:'b-paused'};
-const CCAT={Novedades:'#A78BFA',Eventos:'#F472B6',Horarios:'#34D399',Salud:'#60A5FA',Mantenimiento:'#FBB040'};
-
-// ════════════════════════════════════════════════════
-// AUTH
-// ════════════════════════════════════════════════════
-let currentUser=null;// {role:'admin'} or {role:'member', memberId}
-let loginTab='admin';
-
-function setLoginTab(t,btn){
-  loginTab=t;
-  document.querySelectorAll('.login-tab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('loginAdminFields').style.display=t==='admin'?'':'none';
-  document.getElementById('loginUserFields').style.display=t==='user'?'':'none';
-}
-
-function doLogin(){
-  if(loginTab==='admin'){
-    const u=document.getElementById('loginUser').value.trim();
-    const p=document.getElementById('loginPass').value;
-    if(u==='admin'&&p==='1234'){
-      currentUser={role:'admin'};
-      bootApp();
-    } else {showToast('Usuario o contraseña incorrectos','error')}
-  } else {
-    const e=document.getElementById('loginEmail').value.trim().toLowerCase();
-    const p=document.getElementById('loginPassU').value;
-    const m=DB.members.find(x=>x.email.toLowerCase()===e&&x.pass===p);
-    if(m){currentUser={role:'member',memberId:m.id};bootApp();}
-    else showToast('Email o contraseña incorrectos','error');
-  }
-}
-
-function doLogout(){
-  currentUser=null;
-  toggleDrawer(false);
-  document.body.style.overflow='';
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('topNav').style.display='none';
-  document.getElementById('appWrap').style.display='none';
-  document.getElementById('loginPass').value='';
-  document.getElementById('loginPassU').value='';
-}
-
-function bootApp(){
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('topNav').style.display='flex';
-  document.getElementById('appWrap').style.display='flex';
-  buildNav();
-  if(currentUser.role==='admin') navigate('dashboard');
-  else navigate('myprofile');
-  // Sincronizar con Supabase en segundo plano
-  cargarSupabase();
-}
-
-// ════════════════════════════════════════════════════
-// NAV BUILD
-// ════════════════════════════════════════════════════
-const ADMIN_PAGES=[
-  {id:'dashboard',icon:'📊',label:'Dashboard'},
-  {id:'members',icon:'👥',label:'Miembros'},
-  {id:'alerts',icon:'🔔',label:'Alertas',badge:true},
-  {id:'news',icon:'📰',label:'Noticias'},
-  {id:'suggestions',icon:'💬',label:'Sugerencias',badge:true},
-  {id:'plans',icon:'📋',label:'Planes'},
-  {id:'settings',icon:'⚙️',label:'Ajustes'},
-];
-const USER_PAGES=[
-  {id:'myprofile',icon:'👤',label:'Mi Perfil'},
-  {id:'news',icon:'📰',label:'Noticias'},
-  {id:'mysuggest',icon:'💬',label:'Mis Sugerencias'},
-];
-
-// ── BOTTOM NAV: only the 4-5 most important pages
-const ADMIN_BNAV=[
-  {id:'dashboard',icon:'📊',label:'Inicio'},
-  {id:'members',icon:'👥',label:'Miembros'},
-  {id:'alerts',icon:'🔔',label:'Alertas',badge:'alerts'},
-  {id:'news',icon:'📰',label:'Noticias'},
-  {id:'more',icon:'☰',label:'Más'},
-];
-const USER_BNAV=[
-  {id:'myprofile',icon:'👤',label:'Mi Perfil'},
-  {id:'news',icon:'📰',label:'Noticias'},
-  {id:'mysuggest',icon:'💬',label:'Sugerencias'},
-];
-
-function buildNav(){
-  const pages=currentUser.role==='admin'?ADMIN_PAGES:USER_PAGES;
-  const bnavPages=currentUser.role==='admin'?ADMIN_BNAV:USER_BNAV;
-
-  // ── desktop top nav links
-  const nl=document.getElementById('navLinks');
-  nl.innerHTML='';
-  pages.forEach(p=>{
-    const b=document.createElement('button');
-    b.className='nav-link';b.dataset.page=p.id;
-    b.innerHTML=`${p.icon} ${p.label}`;
-    if(p.badge)b.innerHTML+=`<span class="nb" id="nb_${p.id}"></span>`;
-    b.onclick=()=>navigate(p.id);
-    nl.appendChild(b);
-  });
-
-  // ── desktop sidebar
-  const sb=document.getElementById('sidebar');
-  sb.innerHTML='<div class="sid-label">Menú</div>';
-  pages.forEach(p=>{
-    const d=document.createElement('div');
-    d.className='sid-item';d.dataset.page=p.id;
-    d.innerHTML=`<span class="sid-icon">${p.icon}</span>${p.label}${p.badge?`<span class="sid-badge" id="sb_${p.id}" style="display:none"></span>`:''}`;
-    d.onclick=()=>navigate(p.id);
-    sb.appendChild(d);
-  });
-
-  // ── mobile drawer nav
-  const dn=document.getElementById('drawerNav');
-  dn.innerHTML='<div class="sid-label">Menú</div>';
-  pages.forEach(p=>{
-    const d=document.createElement('div');
-    d.className='sid-item';d.dataset.page='dr_'+p.id;
-    d.innerHTML=`<span class="sid-icon">${p.icon}</span>${p.label}${p.badge?`<span class="sid-badge" id="dr_${p.id}" style="display:none"></span>`:''}`;
-    d.onclick=()=>{navigate(p.id);toggleDrawer(false)};
-    dn.appendChild(d);
-  });
-
-  // ── mobile bottom nav
-  const bn=document.getElementById('bottomNavInner');
-  bn.innerHTML='';
-  bnavPages.forEach(p=>{
-    const b=document.createElement('button');
-    b.className='bnav-item';b.dataset.bpage=p.id;
-    b.innerHTML=`<span class="bnav-icon">${p.icon}</span><span>${p.label}</span>${p.badge?`<span class="bnav-dot" id="bd_${p.badge}" style="display:none"></span>`:''}`;
-    b.onclick=()=>{
-      if(p.id==='more'){toggleDrawer(true)}
-      else navigate(p.id);
-    };
-    bn.appendChild(b);
-  });
-
-  // ── user avatar in nav
-  const m=currentUser.role==='member'?DB.members.find(x=>x.id===currentUser.memberId):null;
-  const color=m?gc(m.name+m.last):'#7C3AED';
-  const label=m?ini(m.name,m.last):'A';
-  const av=document.getElementById('navAvatar');
-  av.style.background=color;
-  if(m&&m.photo){av.style.backgroundImage=`url(${m.photo})`;av.style.backgroundSize='cover';av.style.backgroundPosition='center';av.textContent='';}
-  else av.textContent=label;
-  document.getElementById('navName').textContent=m?`${m.name} ${m.last}`:'Administrador';
-  document.getElementById('navRole').textContent=currentUser.role==='admin'?'Admin':'Miembro';
-}
-
-function toggleDrawer(forceOpen){
-  const drawer=document.getElementById('mobileDrawer');
-  const overlay=document.getElementById('drawerOverlay');
-  const isOpen=drawer.classList.contains('open');
-  const open=forceOpen!==undefined?forceOpen:!isOpen;
-  drawer.classList.toggle('open',open);
-  overlay.classList.toggle('open',open);
-  document.body.style.overflow=open?'hidden':'';
-}
-
-// ════════════════════════════════════════════════════
-// NAVIGATE
-// ════════════════════════════════════════════════════
-function navigate(page){
-  const mc=document.getElementById('mainContent');
-  mc.innerHTML='';
-  const sec=document.createElement('div');
-  sec.className='page-sec active';
-  mc.appendChild(sec);
-  window.scrollTo({top:0,behavior:'smooth'});
-
-  // mark active: all nav types
-  document.querySelectorAll('.nav-link,.sid-item').forEach(el=>{
-    el.classList.toggle('active',el.dataset.page===page);
-  });
-  document.querySelectorAll('.bnav-item').forEach(el=>{
-    el.classList.toggle('active',el.dataset.bpage===page);
-  });
-  document.querySelectorAll('[data-page]').forEach(el=>{
-    if(el.dataset.page==='dr_'+page)el.classList.add('active');
-    else if(el.dataset.page&&el.dataset.page.startsWith('dr_'))el.classList.remove('active');
-  });
-
-  updateBadges();
-
-  switch(page){
-    case'dashboard':renderDashboard(sec);break;
-    case'members':renderMembers(sec);break;
-    case'alerts':renderAlerts(sec);break;
-    case'news':renderNews(sec);break;
-    case'suggestions':renderSuggestions(sec);break;
-    case'mysuggest':renderMySuggest(sec);break;
-    case'plans':renderPlans(sec);break;
-    case'settings':renderSettings(sec);break;
-    case'myprofile':renderMyProfile(sec);break;
-  }
-}
-
-function updateBadges(){
-  const alerts=DB.members.filter(m=>['expiring','expired'].includes(getStatus(m))).length;
-  const pending=DB.suggestions.filter(s=>s.status==='pend').length;
-  ['nb_alerts','sb_alerts','dr_alerts'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=alerts;el.style.display=alerts?'':'none'}});
-  ['nb_suggestions','sb_suggestions','dr_suggestions'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=pending;el.style.display=pending?'':'none'}});
-  // bottom nav dots
-  const bdA=document.getElementById('bd_alerts');if(bdA)bdA.style.display=alerts?'':'none';
-}
-
-// ════════════════════════════════════════════════════
-// DASHBOARD
-// ════════════════════════════════════════════════════
-function renderDashboard(sec){
-  const total=DB.members.length;
-  const active=DB.members.filter(m=>getStatus(m)==='active').length;
-  const expiring=DB.members.filter(m=>getStatus(m)==='expiring').length;
-  const expired=DB.members.filter(m=>getStatus(m)==='expired').length;
-  const now=new Date().toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
-  sec.innerHTML=`
-    <div class="topbar">
-      <div><div class="page-title">Dashboard</div><div class="page-sub">${now}</div></div>
-      <button class="btn btn-primary" onclick="openAddMember()">+ Nuevo Miembro</button>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-card c-violet"><div class="stat-icon">👥</div><div class="stat-label">Total Miembros</div><div class="stat-value">${total}</div><div class="stat-sub">Registrados</div></div>
-      <div class="stat-card c-green"><div class="stat-icon">✅</div><div class="stat-label">Activos</div><div class="stat-value">${active}</div><div class="stat-sub">Membresía vigente</div></div>
-      <div class="stat-card c-amber"><div class="stat-icon">⚠️</div><div class="stat-label">Por vencer</div><div class="stat-value">${expiring}</div><div class="stat-sub">Próximos 7 días</div></div>
-      <div class="stat-card c-red"><div class="stat-icon">❌</div><div class="stat-label">Vencidos</div><div class="stat-value">${expired}</div><div class="stat-sub">Sin membresía activa</div></div>
-    </div>
-    <div class="sec-hd"><div class="sec-title">Miembros recientes</div><button class="btn btn-ghost btn-sm" onclick="navigate('members')">Ver todos →</button></div>
-    <div class="table-wrap"><table><thead><tr><th>Miembro</th><th>Plan</th><th>Estado</th><th>Días restantes</th><th></th></tr></thead><tbody id="dashTb"></tbody></table>
-    <div class="member-cards" id="dashCards"></div></div>`;
-  const tb=document.getElementById('dashTb');
-  const cards=document.getElementById('dashCards');
-  DB.members.slice(-6).reverse().forEach(m=>{tb.appendChild(buildRow(m,false));cards.appendChild(buildCard(m));});
-}
-
-// ════════════════════════════════════════════════════
-// MEMBERS
-// ════════════════════════════════════════════════════
-let memberFilter='all';
-function renderMembers(sec){
-  sec.innerHTML=`
-    <div class="topbar">
-      <div><div class="page-title">Miembros</div></div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <div class="search-box"><span>🔍</span><input id="memberSearch" placeholder="Buscar..." oninput="filterMembers()"></div>
-        <button class="btn btn-primary" onclick="openAddMember()">+ Nuevo Miembro</button>
+      <div class="hero-stats reveal">
+        <div class="hstat"><b>+30</b><span>Productos disponibles</span></div>
+        <div class="hstat"><b>8</b><span>Categorías</span></div>
+        <div class="hstat"><b>4.6</b><span>Calificación promedio</span></div>
       </div>
     </div>
-    <div class="sec-hd">
-      <div class="filters">
-        <button class="flt active" onclick="setMF('all',this)">Todos</button>
-        <button class="flt" onclick="setMF('active',this)">Activos</button>
-        <button class="flt" onclick="setMF('expiring',this)">Por vencer</button>
-        <button class="flt" onclick="setMF('expired',this)">Vencidos</button>
-        <button class="flt" onclick="setMF('paused',this)">Pausados</button>
-      </div>
+    <div class="hero-visual">
+      <div class="hero-orb"><span>MC</span></div>
+      <div class="float-card fc1"><div class="ic-wrap" id="fcIc1"></div><div><b>Auriculares TWS</b><span>Más vendido</span></div></div>
+      <div class="float-card fc2"><div class="ic-wrap" id="fcIc2"></div><div><b>Cargador 33W</b><span>Carga rápida</span></div></div>
+      <div class="float-card fc3"><div class="ic-wrap" id="fcIc3"></div><div><b>Funda MagSafe</b><span>Antigolpe</span></div></div>
     </div>
-    <div class="table-wrap">
-      <table><thead><tr><th>Miembro</th><th>Teléfono</th><th>Plan</th><th>Estado</th><th>Días restantes</th><th>Vence</th><th></th></tr></thead>
-      <tbody id="membersTb"></tbody></table>
-      <div class="member-cards" id="memberCards"></div>
-      <div id="membersEmpty" class="empty-state" style="display:none"><div class="empty-icon">🏋️</div><p>Sin resultados</p></div>
-    </div>`;
-  filterMembers();
-}
-function setMF(f,btn){
-  memberFilter=f;
-  document.querySelectorAll('.flt').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');filterMembers();
-}
-function filterMembers(){
-  const q=(document.getElementById('memberSearch')?.value||'').toLowerCase();
-  const tb=document.getElementById('membersTb');
-  const cards=document.getElementById('memberCards');
-  if(!tb)return;
-  tb.innerHTML='';
-  if(cards)cards.innerHTML='';
-  let list=DB.members.filter(m=>{
-    const st=getStatus(m);
-    const ok=memberFilter==='all'||st===memberFilter;
-    const match=(m.name+' '+m.last+' '+m.email).toLowerCase().includes(q);
-    return ok&&match;
-  });
-  document.getElementById('membersEmpty').style.display=list.length?'none':'';
-  list.forEach(m=>{
-    tb.appendChild(buildRow(m,true));
-    if(cards)cards.appendChild(buildCard(m));
-  });
-}
+  </div>
+</section>
 
-function buildCard(m){
-  const st=getStatus(m),rem=getRemaining(m);
-  const total=m.totalDays||PLAN_DAYS[m.plan]||30;
-  const pct=Math.min(100,Math.round(rem/total*100));
-  const bc=st==='active'?'#10B981':st==='expiring'?'#F59E0B':'#EF4444';
-  const color=gc(m.name+m.last);
-  const avHtml=m.photo?
-    `<div class="avatar" style="width:42px;height:42px;background-image:url(${m.photo});background-size:cover;background-position:center"></div>`:
-    `<div class="avatar" style="width:42px;height:42px;background:${color};font-size:15px">${ini(m.name,m.last)}</div>`;
-  const div=document.createElement('div');
-  div.className='mc';
-  div.innerHTML=`
-    <div class="mc-top">
-      ${avHtml}
-      <div class="mc-info">
-        <div class="mc-name">${m.name} ${m.last}</div>
-        <div class="mc-email">${m.email}</div>
-      </div>
-      <span class="badge ${SC[st]}">${SL[st]}</span>
+<div class="perks">
+  <div class="container perks-row">
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v9H3zM16 10h3l2 3v3h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg> Envíos a todo el país</div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4l6 6-9 9-6 1 1-6z"/></svg> Servicio técnico avanzado</div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="13" rx="2"/><path d="M3 9h18"/></svg> Pagos con tarjeta y transferencia</div>
+    <div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7z"/></svg> Garantía en todos los productos</div>
+  </div>
+</div>
+
+<section id="categorias">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div><h2>Categorías</h2><p>Encontrá justo lo que tu celular necesita</p></div>
     </div>
-    <div class="mc-mid">
-      <span class="plan-tag">${m.plan}</span>
-      <div class="days-bar" style="flex:1;margin-left:8px">
-        <div class="days-track"><div class="days-fill" style="width:${pct}%;background:${bc}"></div></div>
-        <span class="days-text">${rem}d</span>
-      </div>
+    <div class="cat-grid reveal" id="catGrid"></div>
+  </div>
+</section>
+
+<section id="catalogo">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div><h2>Catálogo completo</h2><p id="resultCountTop">Mostrando productos</p></div>
     </div>
-    <div class="mc-bot">
-      <button class="btn btn-ghost btn-sm" style="flex:1" onclick="viewProfile(${m.id});event.stopPropagation()">Ver perfil</button>
-      <button class="btn btn-success btn-sm" onclick="openRenew(${m.id});event.stopPropagation()">🔄 Renovar</button>
-      <button class="btn btn-ghost btn-sm" onclick="openEditMember(${m.id});event.stopPropagation()">✏️</button>
-      <button class="btn btn-danger btn-sm" onclick="delMember(${m.id});event.stopPropagation()">🗑️</button>
-    </div>`;
-  div.onclick=()=>viewProfile(m.id);
-  return div;
-}
-
-function buildRow(m,full){
-  const st=getStatus(m),rem=getRemaining(m);
-  const total=m.totalDays||PLAN_DAYS[m.plan]||30;
-  const pct=Math.min(100,Math.round(rem/total*100));
-  const bc=st==='active'?'#10B981':st==='expiring'?'#F59E0B':'#EF4444';
-  const color=gc(m.name+m.last);
-  const avHtml=m.photo?
-    `<div class="avatar" style="background-image:url(${m.photo});background-size:cover;background-position:center"></div>`:
-    `<div class="avatar" style="background:${color}">${ini(m.name,m.last)}</div>`;
-  let h=`<td><div class="member-info">${avHtml}<div><div class="member-name">${m.name} ${m.last}</div><div class="member-email">${m.email}</div></div></div></td>`;
-  if(full)h+=`<td style="color:var(--muted)">${m.phone}</td>`;
-  h+=`<td><span class="plan-tag">${m.plan}</span></td>`;
-  h+=`<td><span class="badge ${SC[st]}">${SL[st]}</span></td>`;
-  h+=`<td><div class="days-bar"><div class="days-track"><div class="days-fill" style="width:${pct}%;background:${bc}"></div></div><span class="days-text">${rem}d</span></div></td>`;
-  if(full)h+=`<td style="color:var(--muted);font-size:12px">${getEndDate(m)}</td>`;
-  h+=`<td><div class="row-actions">
-    <button class="btn btn-ghost btn-sm" onclick="viewProfile(${m.id});event.stopPropagation()">Ver</button>
-    <button class="btn btn-success btn-sm" onclick="openRenew(${m.id});event.stopPropagation()">🔄</button>
-    <button class="btn btn-ghost btn-sm" onclick="openEditMember(${m.id});event.stopPropagation()">✏️</button>
-    <button class="btn btn-danger btn-sm" onclick="delMember(${m.id});event.stopPropagation()">🗑️</button>
-  </div></td>`;
-  const tr=document.createElement('tr');
-  tr.innerHTML=h;tr.onclick=()=>viewProfile(m.id);
-  return tr;
-}
-
-// ════════════════════════════════════════════════════
-// ADD / EDIT MEMBER
-// ════════════════════════════════════════════════════
-let editId=null;
-function openAddMember(){
-  editId=null;
-  document.getElementById('mmTitle').textContent='Nuevo Miembro';
-  ['fName','fLast','fEmail','fPhone','fNotes','fPass'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('fBirth').value='';
-  document.getElementById('fPlan').value='Mensual';
-  document.getElementById('fStatus').value='active';
-  document.getElementById('fStart').value=today();
-  openModal('modalMember');
-}
-function openEditMember(id){
-  editId=id;
-  const m=DB.members.find(x=>x.id===id);
-  document.getElementById('mmTitle').textContent='Editar Miembro';
-  document.getElementById('fName').value=m.name;
-  document.getElementById('fLast').value=m.last;
-  document.getElementById('fEmail').value=m.email;
-  document.getElementById('fPhone').value=m.phone;
-  document.getElementById('fBirth').value=m.birth||'';
-  document.getElementById('fPlan').value=m.plan;
-  document.getElementById('fStatus').value=m.status;
-  document.getElementById('fStart').value=m.start;
-  document.getElementById('fNotes').value=m.notes||'';
-  document.getElementById('fPass').value=m.pass||'';
-  openModal('modalMember');
-}
-function saveMember(){
-  const name=document.getElementById('fName').value.trim();
-  const last=document.getElementById('fLast').value.trim();
-  if(!name||!last){showToast('Nombre y apellido son requeridos','error');return}
-  const data={name,last,email:document.getElementById('fEmail').value.trim(),
-    phone:document.getElementById('fPhone').value.trim(),
-    birth:document.getElementById('fBirth').value,
-    plan:document.getElementById('fPlan').value,
-    status:document.getElementById('fStatus').value,
-    start:document.getElementById('fStart').value,
-    notes:document.getElementById('fNotes').value.trim(),
-    pass:document.getElementById('fPass').value||'1234',
-    photo:editId?DB.members.find(x=>x.id===editId)?.photo||'':''
-  };
-  if(editId){
-    const i=DB.members.findIndex(x=>x.id===editId);
-    DB.members[i] = {
-    ...DB.members[i],
-    ...data
-};
-    showToast('Miembro actualizado','success');
-  } else {
-  DB.members.push({
-    id: DB.nextId.m++,
-    ...data
-});
-    showToast('Miembro agregado','success');
-  }
-  saveDB();closeModal('modalMember');navigate(currentUser.role==='admin'?'members':'myprofile');
-}
-function delMember(id){
-  if(!confirm('¿Eliminar este miembro?'))return;
-  DB.members=DB.members.filter(m=>m.id!==id);
-  saveDB();navigate('members');showToast('Eliminado','info');
-}
-
-// ════════════════════════════════════════════════════
-// RENEW
-// ════════════════════════════════════════════════════
-let renewId=null,renewMonths=null;
-const MONTH_LABELS=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-
-function openRenew(id){
-  renewId=id;renewMonths=null;
-  const grid=document.getElementById('monthsGrid');
-  grid.innerHTML='';
-  for(let i=1;i<=12;i++){
-    const b=document.createElement('button');
-    b.className='month-btn';
-    b.innerHTML=`<span class="mnum">${i}</span><span class="mlab">${i===1?'mes':'meses'}</span>`;
-    b.onclick=()=>selectMonth(i,b);
-    grid.appendChild(b);
-  }
-  document.getElementById('renewSummary').style.display='none';
-  document.getElementById('btnConfirmRenew').disabled=true;
-  openModal('modalRenew');
-}
-function selectMonth(n,btn){
-  renewMonths=n;
-  document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');
-  const days=n*30;
-  const m=DB.members.find(x=>x.id===renewId);
-  const endStr=new Date(Date.now()+days*86400000).toLocaleDateString('es-AR');
-  const sum=document.getElementById('renewSummary');
-  sum.style.display='';
-  sum.innerHTML=`✅ <strong>${m.name} ${m.last}</strong> — <strong>${n} ${n===1?'mes':'meses'}</strong> (${days} días) · Vence el <strong>${endStr}</strong>`;
-  document.getElementById('btnConfirmRenew').disabled=false;
-}
-function confirmRenew(){
-  if(!renewMonths)return;
-  const m=DB.members.find(x=>x.id===renewId);
-  m.start=today();
-  m.totalDays=renewMonths*30;
-  m.status='active';
-  saveDB();closeModal('modalRenew');
-  navigate(currentUser.role==='admin'?'members':'myprofile');
-  showToast(`${m.name} renovado por ${renewMonths} ${renewMonths===1?'mes':'meses'}`,'success');
-}
-
-// ════════════════════════════════════════════════════
-// PROFILE MODAL
-// ════════════════════════════════════════════════════
-function viewProfile(id){
-  const m=DB.members.find(x=>x.id===id);
-  const st=getStatus(m),rem=getRemaining(m);
-  const total=m.totalDays||PLAN_DAYS[m.plan]||30;
-  const pct=Math.min(1,rem/total);
-  const color=gc(m.name+m.last);
-  const rc=st==='active'?'#10B981':st==='expiring'?'#F59E0B':'#EF4444';
-  const r=42,circ=2*Math.PI*r,dash=circ*(1-pct);
-  const age=calcAgeFrom(m.birth);
-  const avHtml=m.photo?
-    `<div class="profile-av" style="background-image:url(${m.photo});background-size:cover;background-position:center;border:3px solid ${color}"></div>`:
-    `<div class="profile-av" style="background:${color}">${ini(m.name,m.last)}</div>`;
-  document.getElementById('profileContent').innerHTML=`
-    <div class="profile-hd">
-      ${avHtml}
+    <div class="shop-layout">
+      <aside class="filters-panel" id="filtersPanel">
+        <h4>Categorías</h4>
+        <div class="f-group" id="catFilterList"></div>
+        <h4>Precio máximo</h4>
+        <div class="f-group">
+          <input type="range" class="price-range" id="priceRange" min="4000" max="60000" step="1000" value="60000">
+          <div class="price-vals"><span>$4.000</span><span id="priceMaxLabel">$60.000</span></div>
+        </div>
+        <span class="f-clear" id="clearFilters">Limpiar filtros</span>
+      </aside>
       <div>
-        <div class="profile-name">${m.name} ${m.last}</div>
-        <div class="profile-plan">${m.plan} · <span class="badge ${SC[st]}">${SL[st]}</span></div>
-        ${m.notes?`<div style="font-size:12px;color:var(--muted);margin-top:5px">📝 ${m.notes}</div>`:''}
-      </div>
-    </div>
-    <div style="display:flex;justify-content:center;margin-bottom:20px">
-      <div class="ring-wrap">
-        <div class="ring-center">
-          <svg class="ring" width="100" height="100" viewBox="0 0 100 100">
-            <circle class="ring-track" cx="50" cy="50" r="${r}"/>
-            <circle class="ring-fill" cx="50" cy="50" r="${r}" stroke="${rc}" stroke-dasharray="${circ}" stroke-dashoffset="${dash}"/>
-          </svg>
-          <div class="ring-num" style="color:${rc}">${rem}<br><span style="font-size:10px;color:var(--muted);font-weight:500">días</span></div>
-        </div>
-        <div class="ring-lbl">días restantes</div>
-      </div>
-    </div>
-    <div class="info-grid">
-      <div class="info-item"><div class="lbl">Email</div><div class="val" style="font-size:12px">${m.email||'—'}</div></div>
-      <div class="info-item"><div class="lbl">Teléfono</div><div class="val" style="font-size:12px">${m.phone||'—'}</div></div>
-      <div class="info-item"><div class="lbl">Edad</div><div class="val">${age!==null?age+' años':'—'}</div></div>
-      <div class="info-item"><div class="lbl">Vence</div><div class="val" style="font-size:13px">${getEndDate(m)}</div></div>
-    </div>`;
-  document.getElementById('profileFt').innerHTML=`
-    <button class="btn btn-ghost" onclick="closeModal('modalProfile')">Cerrar</button>
-    <button class="btn btn-amber" onclick="closeModal('modalProfile');openRenew(${id})">🔄 Renovar</button>
-    <button class="btn btn-ghost" onclick="closeModal('modalProfile');openEditMember(${id})">✏️ Editar</button>`;
-  openModal('modalProfile');
-}
-
-// ════════════════════════════════════════════════════
-// ALERTS
-// ════════════════════════════════════════════════════
-function renderAlerts(sec){
-  const list=DB.members.filter(m=>['expiring','expired'].includes(getStatus(m)));
-  sec.innerHTML=`<div class="topbar"><div class="page-title">Alertas <span style="font-size:14px;color:var(--muted);font-weight:400">${list.length} pendiente${list.length!==1?'s':''}</span></div></div>`;
-  if(!list.length){sec.innerHTML+=`<div class="empty-state"><div class="empty-icon">🎉</div><p>¡Sin alertas! Todos los miembros están al día.</p></div>`;return}
-  list.forEach(m=>{
-    const st=getStatus(m),rem=getRemaining(m);
-    const c=st==='expiring'?'#F59E0B':'#EF4444';
-    const msg=st==='expiring'?`Vence en ${rem} día${rem!==1?'s':''}`:'Membresía vencida';
-    const d=document.createElement('div');
-    d.className='alert-card';
-    d.innerHTML=`<div class="alert-dot" style="background:${c}"></div>
-      <div class="alert-body"><div class="alert-name">${m.name} ${m.last}</div><div class="alert-msg">${msg} · ${m.plan}</div></div>
-      <button class="btn btn-success btn-sm" onclick="openRenew(${m.id})">🔄 Renovar</button>
-      <button class="btn btn-ghost btn-sm" onclick="viewProfile(${m.id})">Ver</button>`;
-    sec.appendChild(d);
-  });
-}
-
-// ════════════════════════════════════════════════════
-// NEWS
-// ════════════════════════════════════════════════════
-function renderNews(sec){
-  const isAdmin=currentUser.role==='admin';
-  sec.innerHTML=`<div class="topbar">
-    <div><div class="page-title">Noticias</div><div class="page-sub">Novedades del gimnasio</div></div>
-    ${isAdmin?`<button class="btn btn-primary" onclick="openModal('modalNews')">+ Nueva publicación</button>`:''}
-  </div><div class="news-grid" id="newsGrid"></div>`;
-  const grid=document.getElementById('newsGrid');
-  if(!DB.news.length){grid.innerHTML=`<div class="empty-state"><div class="empty-icon">📰</div><p>No hay publicaciones todavía.</p></div>`;return}
-  [...DB.news].reverse().forEach(n=>grid.appendChild(buildNewsCard(n)));
-}
-
-function buildNewsCard(n){
-  const catColor=CCAT[n.cat]||'#A78BFA';
-  const div=document.createElement('div');div.className='news-card';
-  const isAdmin=currentUser.role==='admin';
-  const uid=currentUser.role==='member'?currentUser.memberId:'admin';
-  let reactHtml='';
-  const REACT_KEYS=[['like','❤️'],['strong','💪'],['party','🎉']];
-  REACT_KEYS.forEach(([key,emoji])=>{
-    const count=n.reactions[key]||0;
-    const reacted=n.userReacted[uid]===key;
-    reactHtml+=`<button class="react-btn ${reacted?'reacted':''}" onclick="react(${n.id},'${key}')">${emoji} <span class="react-count">${count}</span></button>`;
-  });
-  div.innerHTML=`
-    <div class="news-img">${n.emoji||'📰'}</div>
-    <div class="news-body">
-      <div class="news-cat" style="color:${catColor}">${n.cat.toUpperCase()}</div>
-      <div class="news-title">${n.title}</div>
-      <div class="news-text">${n.body}</div>
-      <div class="news-meta">
-        <span class="news-date">${new Date(n.date+'T12:00:00').toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'})}</span>
-        <div class="reactions">${reactHtml}</div>
-      </div>
-      ${isAdmin?`<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:6px">
-        <button class="btn btn-danger btn-sm" onclick="deleteNews(${n.id})">🗑️ Eliminar</button>
-      </div>`:''}
-    </div>`;
-  return div;
-}
-
-function react(newsId,key){
-  const n=DB.news.find(x=>x.id===newsId);
-  if(!n)return;
-  const uid=currentUser.role==='member'?currentUser.memberId:'admin';
-  const prev=n.userReacted[uid];
-  if(prev===key){
-    n.reactions[key]=Math.max(0,(n.reactions[key]||0)-1);
-    delete n.userReacted[uid];
-  } else {
-    if(prev){n.reactions[prev]=Math.max(0,(n.reactions[prev]||0)-1)}
-    n.reactions[key]=(n.reactions[key]||0)+1;
-    n.userReacted[uid]=key;
-  }
-  saveDB();navigate('news');
-}
-
-function publishNews(){
-  const title=document.getElementById('nTitle').value.trim();
-  const body=document.getElementById('nBody').value.trim();
-  if(!title||!body){showToast('Título y contenido requeridos','error');return}
-  DB.news.push({id:DB.nextId.n++,cat:document.getElementById('nCat').value,emoji:document.getElementById('nEmoji').value||'📢',title,body,date:today(),reactions:{'like':0,'strong':0,'party':0},userReacted:{}});
-  saveDB();closeModal('modalNews');navigate('news');showToast('Publicado','success');
-}
-function deleteNews(id){
-  if(!confirm('¿Eliminar esta publicación?'))return;
-  DB.news=DB.news.filter(n=>n.id!==id);
-  saveDB();navigate('news');showToast('Eliminado','info');
-}
-
-// ════════════════════════════════════════════════════
-// SUGGESTIONS (admin view)
-// ════════════════════════════════════════════════════
-const STYPE={sug:{icon:'💡',label:'Sugerencia',cls:'t-sug'},rep:{icon:'🚨',label:'Reporte',cls:'t-rep'},com:{icon:'💚',label:'Comentario',cls:'t-com'}};
-const SSTATUS={pend:{label:'Pendiente',cls:'stt-pend'},rev:{label:'En revisión',cls:'stt-rev'},done:{label:'Resuelto',cls:'stt-done'}};
-
-function renderSuggestions(sec){
-  sec.innerHTML=`<div class="topbar"><div class="page-title">Sugerencias & Reportes</div></div>
-  <div class="filters" style="margin-bottom:16px">
-    <button class="flt active" onclick="setSugF('all',this)">Todas</button>
-    <button class="flt" onclick="setSugF('pend',this)">Pendientes</button>
-    <button class="flt" onclick="setSugF('rev',this)">En revisión</button>
-    <button class="flt" onclick="setSugF('done',this)">Resueltas</button>
-  </div>
-  <div class="sug-list" id="sugList"></div>
-  <div id="sugEmpty" class="empty-state" style="display:none"><div class="empty-icon">💬</div><p>No hay sugerencias.</p></div>`;
-  renderSugList('all');
-}
-let sugFilter='all';
-function setSugF(f,btn){
-  sugFilter=f;
-  document.querySelectorAll('.flt').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');renderSugList(f);
-}
-function renderSugList(f){
-  const list=document.getElementById('sugList');
-  if(!list)return;
-  list.innerHTML='';
-  let items=f==='all'?DB.suggestions:DB.suggestions.filter(s=>s.status===f);
-  document.getElementById('sugEmpty').style.display=items.length?'none':'';
-  items.forEach(s=>{
-    const m=DB.members.find(x=>x.id===s.memberId);
-    const t=STYPE[s.type];const st=SSTATUS[s.status];
-    const div=document.createElement('div');div.className='sug-card';
-    div.innerHTML=`<div class="sug-icon">${t.icon}</div>
-      <div class="sug-body">
-        <div class="sug-head">
-          <span class="sug-from">${m?m.name+' '+m.last:'Miembro'}</span>
-          <span class="sug-type ${t.cls}">${t.label}</span>
-        </div>
-        <div class="sug-text">${s.text}</div>
-        <div class="sug-date">${new Date(s.date+'T12:00:00').toLocaleDateString('es-AR')}</div>
-      </div>
-      <div class="sug-status">
-        <span class="stt ${st.cls}">${st.label}</span>
-        <div style="display:flex;flex-direction:column;gap:4px;margin-top:6px">
-          ${s.status!=='rev'?`<button class="btn btn-xs btn-amber" onclick="setSugStatus(${s.id},'rev')">Revisar</button>`:''}
-          ${s.status!=='done'?`<button class="btn btn-xs btn-success" onclick="setSugStatus(${s.id},'done')">Resolver</button>`:''}
-        </div>
-      </div>`;
-    list.appendChild(div);
-  });
-}
-function setSugStatus(id,st){
-  DB.suggestions.find(s=>s.id===id).status=st;
-  saveDB();renderSugList(sugFilter);updateBadges();showToast('Estado actualizado','success');
-}
-
-// ════════════════════════════════════════════════════
-// MY SUGGESTIONS (user)
-// ════════════════════════════════════════════════════
-function renderMySuggest(sec){
-  const uid=currentUser.memberId;
-  const mine=DB.suggestions.filter(s=>s.memberId===uid);
-  sec.innerHTML=`
-    <div class="topbar"><div class="page-title">Mis Sugerencias</div></div>
-    <div class="news-form-card" style="margin-bottom:20px">
-      <div style="font-size:15px;font-weight:700;margin-bottom:14px">Enviar nueva</div>
-      <div class="form-row">
-        <div class="fg"><label class="fl">Tipo</label>
-          <select class="fs" id="sugType">
-            <option value="sug">💡 Sugerencia</option>
-            <option value="rep">🚨 Reporte</option>
-            <option value="com">💚 Comentario positivo</option>
-          </select>
-        </div>
-        <div class="fg full"><label class="fl">Mensaje</label><textarea class="fi" id="sugText" placeholder="Contanos lo que pensás..." style="min-height:72px"></textarea></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="submitSug()" style="margin-top:4px">Enviar</button>
-    </div>
-    <div class="sec-title" style="margin-bottom:12px">Mis envíos</div>
-    <div class="sug-list" id="mySugList"></div>
-    <div id="mySugEmpty" class="empty-state" style="display:none"><div class="empty-icon">💬</div><p>Aún no enviaste sugerencias.</p></div>`;
-  renderMySugList();
-}
-function renderMySugList(){
-  const uid=currentUser.memberId;
-  const list=document.getElementById('mySugList');
-  if(!list)return;
-  list.innerHTML='';
-  const mine=DB.suggestions.filter(s=>s.memberId===uid);
-  document.getElementById('mySugEmpty').style.display=mine.length?'none':'';
-  mine.reverse().forEach(s=>{
-    const t=STYPE[s.type];const st=SSTATUS[s.status];
-    const div=document.createElement('div');div.className='sug-card';
-    div.innerHTML=`<div class="sug-icon">${t.icon}</div>
-      <div class="sug-body">
-        <div class="sug-head"><span class="sug-type ${t.cls}">${t.label}</span></div>
-        <div class="sug-text">${s.text}</div>
-        <div class="sug-date">${new Date(s.date+'T12:00:00').toLocaleDateString('es-AR')}</div>
-      </div>
-      <div class="sug-status"><span class="stt ${st.cls}">${st.label}</span></div>`;
-    list.appendChild(div);
-  });
-}
-function submitSug(){
-  const text=document.getElementById('sugText')?.value.trim();
-  if(!text){showToast('Escribí un mensaje','error');return}
-  DB.suggestions.push({id:DB.nextId.s++,memberId:currentUser.memberId,type:document.getElementById('sugType').value,text,date:today(),status:'pend'});
-  saveDB();navigate('mysuggest');showToast('Sugerencia enviada ✓','success');
-}
-
-// ════════════════════════════════════════════════════
-// PLANS
-// ════════════════════════════════════════════════════
-function renderPlans(sec){
-  const counts={};DB.members.forEach(m=>{counts[m.plan]=(counts[m.plan]||0)+1});
-  const cols=['#7C3AED','#10B981','#F59E0B','#3B82F6'];
-  sec.innerHTML=`<div class="topbar"><div class="page-title">Planes</div></div>
-    <div class="stats-grid">${Object.entries(PLAN_DAYS).map(([name,days],i)=>`
-      <div class="stat-card" style="cursor:default">
-        <div style="font-size:26px;margin-bottom:10px">📋</div>
-        <div style="font-size:17px;font-weight:800">${name}</div>
-        <div style="font-size:12px;color:var(--muted);margin:4px 0 12px">${days} días base</div>
-        <div style="font-size:32px;font-weight:800;color:${cols[i]}">${counts[name]||0}</div>
-        <div style="font-size:12px;color:var(--muted)">miembros</div>
-      </div>`).join('')}
-    </div>
-    <div class="set-card" style="max-width:520px">
-      <div class="set-title">💡 Sobre la renovación flexible</div>
-      <p style="font-size:13px;color:var(--muted);line-height:1.7">Los planes son la base de referencia para los miembros, pero al momento de renovar podés elegir exactamente cuántos meses pagar (de 1 a 12). Cada mes equivale a 30 días de acceso.</p>
-    </div>`;
-}
-
-// ════════════════════════════════════════════════════
-// SETTINGS
-// ════════════════════════════════════════════════════
-function renderSettings(sec){
-  sec.innerHTML=`<div class="topbar"><div class="page-title">Ajustes</div></div>
-  <div class="set-card">
-    <div class="set-title">Notificaciones</div>
-    <div class="set-row"><div><div class="set-lbl">Alertas de vencimiento</div><div class="set-desc">Avisar cuando un miembro vence en 7 días</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
-    <div class="set-row"><div><div class="set-lbl">Recordatorio de pago</div><div class="set-desc">Notificar cuando hay pagos pendientes</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
-    <div class="set-row"><div><div class="set-lbl">Nuevo miembro</div><div class="set-desc">Notificar al registrar un nuevo miembro</div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
-  </div>
-  <div class="set-card">
-    <div class="set-title">Información del Gimnasio</div>
-    <div class="form-row">
-      <div class="fg">
-    <label class="fl">Nombre</label>
-    <input id="gymName" class="fi"
-          value="${DB.gymInfo?.nombre || 'GymOS Club'}">
-</div>
-
-<div class="fg">
-    <label class="fl">Teléfono</label>
-    <input id="gymPhone" class="fi"
-          value="${DB.gymInfo?.telefono || '+54 381 000-0000'}">
-</div>
-
-<div class="fg full">
-    <label class="fl">Dirección</label>
-    <input id="gymAddress" class="fi"
-          value="${DB.gymInfo?.direccion || 'Av. Independencia 1234, Tucumán'}">
-</div>
-<div class="fg">
-  <label class="fl">WhatsApp</label>
-  <input id="gymWhatsapp" class="fi"
-        value="${DB.gymInfo?.whatsapp || ''}"
-        placeholder="5493811234567 (sin + ni espacios)">
-</div>
-
-<div class="fg">
-  <label class="fl">Instagram</label>
-  <input id="gymInstagram" class="fi"
-        value="${DB.gymInfo?.instagram || ''}"
-        placeholder="https://instagram.com/tugym">
-</div>
-
-<div class="fg">
-  <label class="fl">Facebook</label>
-  <input id="gymFacebook" class="fi"
-        value="${DB.gymInfo?.facebook || ''}"
-        placeholder="https://facebook.com/tugym">
-</div>
-
-<div class="fg">
-  <label class="fl">TikTok</label>
-  <input id="gymTiktok" class="fi"
-        value="${DB.gymInfo?.tiktok || ''}"
-        placeholder="https://tiktok.com/@tugym">
-</div>
-
-<div class="fg full">
-  <label class="fl">Google Maps</label>
-  <input id="gymMaps" class="fi"
-        value="${DB.gymInfo?.mapsUrl || ''}"
-        placeholder="Pegar aqui enlace de Google Maps">
-</div>
-
-<div class="fg">
-  <label class="fl">Horario Lunes a Viernes</label>
-  <input id="gymHorarioSemana" class="fi"
-        value="${DB.gymInfo?.horarioSemana || ''}">
-</div>
-
-<div class="fg">
-  <label class="fl">Horario Sábado</label>
-  <input id="gymHorarioSabado" class="fi"
-        value="${DB.gymInfo?.horarioSabado || ''}">
-</div>
-
-<div class="fg">
-  <label class="fl">Horario Domingo</label>
-  <input id="gymHorarioDomingo" class="fi"
-        value="${DB.gymInfo?.horarioDomingo || ''}">
-</div>
-    </div>
-    <button class="btn btn-primary btn-sm"
-        style="margin-top:8px"
-        onclick="guardarInfoGym()">
-    Guardar cambios
-</button>
-  </div>`;
-}
-
-// ════════════════════════════════════════════════════
-// MY PROFILE (member view)
-// ════════════════════════════════════════════════════
-function renderMyProfile(sec){
-  const m=DB.members.find(x=>x.id===currentUser.memberId);
-  if(!m){sec.innerHTML='<p style="color:var(--muted)">Perfil no encontrado.</p>';return}
-  const st=getStatus(m),rem=getRemaining(m);
-  const total=m.totalDays||PLAN_DAYS[m.plan]||30;
-  const pct=Math.min(1,rem/total);
-  const rc=st==='active'?'#10B981':st==='expiring'?'#F59E0B':'#EF4444';
-  const r=52,circ=2*Math.PI*r,dash=circ*(1-pct);
-  const color=gc(m.name+m.last);
-  const age=calcAgeFrom(m.birth);
-  const avHtml=m.photo?
-    `<div class="up-avatar" style="background-image:url(${m.photo});border-color:${color}"></div>`:
-    `<div class="up-avatar" style="background:${color};border-color:${color}">${ini(m.name,m.last)}</div>`;
-
-  sec.innerHTML=`
-    <div class="topbar"><div><div class="page-title">Mi Perfil</div><div class="page-sub">Bienvenido/a, ${m.name}</div></div>
-    <button class="btn btn-primary" onclick="openUserEdit()">✏️ Editar perfil</button></div>
-    <div class="user-profile-wrap">
-      <div class="user-profile-hero">
-        <div class="up-avatar-wrap">
-          ${avHtml}
-          <label class="up-avatar-btn" for="photoInput" title="Cambiar foto" style="cursor:pointer">📷</label>
-          <input type="file" id="photoInput" accept="image/*" style="display:none;position:absolute;width:0;height:0;opacity:0" onchange="handlePhoto(this)">
-        </div>
-        <div>
-          <div class="up-name">${m.name} ${m.last}</div>
-          <div class="up-plan"><span class="plan-tag">${m.plan}</span> <span class="badge ${SC[st]}">${SL[st]}</span></div>
-          <div class="up-meta">
-            ${age!==null?`<div class="up-meta-item"><strong>${age}</strong> años</div>`:''}
-            <div class="up-meta-item">📧 <strong>${m.email||'—'}</strong></div>
-            <div class="up-meta-item">📱 <strong>${m.phone||'—'}</strong></div>
+        <div class="toolbar">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Buscar fundas, cargadores, auriculares...">
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <button class="btn btn-outline btn-sm" id="filterToggleBtn">Filtros</button>
+            <span class="result-count" id="resultCount"></span>
+            <select class="sort-select" id="sortSelect">
+              <option value="relevance">Relevancia</option>
+              <option value="price-asc">Precio: menor a mayor</option>
+              <option value="price-desc">Precio: mayor a menor</option>
+              <option value="rating">Mejor calificados</option>
+              <option value="new">Novedades</option>
+            </select>
           </div>
         </div>
+        <div class="grid reveal" id="productGrid"></div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="up-card">
-        <div class="up-card-title">⏱️ Estado de membresía</div>
-        <div class="days-ring-row">
-          <div class="ring-wrap">
-            <div class="ring-center">
-              <svg class="ring" width="120" height="120" viewBox="0 0 120 120">
-                <circle class="ring-track" cx="60" cy="60" r="${r}"/>
-                <circle class="ring-fill" cx="60" cy="60" r="${r}" stroke="${rc}" stroke-dasharray="${circ}" stroke-dashoffset="${dash}"/>
-              </svg>
-              <div class="ring-num" style="color:${rc};font-size:26px">${rem}<br><span style="font-size:11px;color:var(--muted);font-weight:500">días</span></div>
-            </div>
-            <div class="ring-lbl">días restantes</div>
-          </div>
-        </div>
-        <div class="info-grid" style="margin-top:16px">
-          <div class="info-item"><div class="lbl">Plan</div><div class="val">${m.plan}</div></div>
-          <div class="info-item"><div class="lbl">Vence</div><div class="val" style="font-size:14px">${getEndDate(m)}</div></div>
-          <div class="info-item"><div class="lbl">Inicio</div><div class="val" style="font-size:14px">${new Date(m.start+'T12:00:00').toLocaleDateString('es-AR')}</div></div>
-          <div class="info-item"><div class="lbl">Duración</div><div class="val">${total} días</div></div>
-        </div>
+<section id="nosotros">
+  <div class="container">
+    <div class="banner reveal">
+      <div>
+        <h3>Servicio técnico avanzado y asesoramiento personalizado</h3>
+        <p>Más de un local físico, reparamos equipos y te ayudamos a elegir el accesorio justo para tu celular. Hacemos envíos a todo el país.</p>
+        <a href="#contacto" class="btn btn-primary">Contactar ahora</a>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="up-card">
-        <div class="up-card-title">👤 Mis datos</div>
-        <div class="info-grid">
-          <div class="info-item"><div class="lbl">Nombre completo</div><div class="val">${m.name} ${m.last}</div></div>
-          <div class="info-item"><div class="lbl">Email</div><div class="val" style="font-size:12px">${m.email||'—'}</div></div>
-          <div class="info-item"><div class="lbl">Teléfono</div><div class="val" style="font-size:13px">${m.phone||'—'}</div></div>
-          <div class="info-item"><div class="lbl">Edad</div><div class="val">${age!==null?age+' años':'—'}</div></div>
-          ${m.birth?`<div class="info-item"><div class="lbl">Fecha de nacimiento</div><div class="val" style="font-size:13px">${new Date(m.birth+'T12:00:00').toLocaleDateString('es-AR')}</div></div>`:''}
-          ${m.notes?`<div class="info-item full" style="grid-column:1/-1"><div class="lbl">Notas</div><div class="val" style="font-size:13px;font-weight:500">${m.notes}</div></div>`:''}
+</main>
+
+<footer id="contacto">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#home" class="brand" style="color:#fff"><span class="brand-badge">MC</span><span class="brand-text">MI <span>CELL</span></span></a>
+        <p>Tienda de telefonía celular: venta de equipos, accesorios y servicio técnico avanzado. Envíos a todo el país.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 1 1-4-7.2"/><path d="M21 11.5L17 9l-2 2-3-3 2-2-2.5-4"/></svg></a>
         </div>
       </div>
-      <div class="up-card">
-  <div class="up-card-title">📍 Información del Gimnasio</div>
-
-  <div class="info-grid">
-
-    <div class="info-item">
-      <div class="lbl">Nombre</div>
-      <div class="val">${DB.gymInfo?.nombre || 'GymOS Club'}</div>
+      <div class="foot-col">
+        <h5>Tienda</h5>
+        <a href="#categorias">Categorías</a>
+        <a href="#catalogo">Productos</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="admin.html">Panel de administración</a>
+      </div>
+      <div class="foot-col">
+        <h5>Ayuda</h5>
+        <a href="#">Envíos</a>
+        <a href="#">Cambios y devoluciones</a>
+        <a href="#">Garantía</a>
+        <a href="#">Preguntas frecuentes</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contacto</h5>
+        <a href="#">Mendoza 493</a>
+        <a href="#">Muñecas 91</a>
+        <a href="#">Lun a Sáb 9 a 20hs</a>
+      </div>
     </div>
-
-    <div class="info-item">
-      <div class="lbl">Teléfono</div>
-      <div class="val">${DB.gymInfo?.telefono || '—'}</div>
+    <div class="foot-bottom">
+      <span>© 2026 MI CELL. Todos los derechos reservados.</span>
+      <span>Hecho para nuestra comunidad de clientes</span>
     </div>
-
-    <div class="info-item full" style="grid-column:1/-1">
-      <div class="lbl">Dirección</div>
-      <div class="val">${DB.gymInfo?.direccion || '—'}</div>
-    </div>
-
-    <div class="info-item">
-      <div class="lbl">Lunes a Viernes</div>
-      <div class="val">${DB.gymInfo?.horarioSemana || '—'}</div>
-    </div>
-
-    <div class="info-item">
-      <div class="lbl">Sábado</div>
-      <div class="val">${DB.gymInfo?.horarioSabado || '—'}</div>
-    </div>
-
-    <div class="info-item">
-      <div class="lbl">Domingo</div>
-      <div class="val">${DB.gymInfo?.horarioDomingo || '—'}</div>
-    </div>
-
   </div>
+</footer>
 
-  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:18px">
+<div class="overlay" id="overlay"></div>
 
-    ${DB.gymInfo?.telefono ? `
-      <a href="tel:${DB.gymInfo.telefono}"
-        class="btn btn-primary">
-        📞 Llamar
-      </a>
-    ` : ''}
-
-    ${DB.gymInfo?.whatsapp ? `
-      <a href="https://wa.me/${DB.gymInfo.whatsapp}"
-        target="_blank"
-        class="btn btn-success">
-        💬 WhatsApp
-      </a>
-    ` : ''}
-
-    ${DB.gymInfo?.mapsUrl ? `
-      <a href="${DB.gymInfo.mapsUrl}"
-       target="_blank"
-        class="btn">
-        🗺️ Cómo llegar
-      </a>
-    ` : ''}
-
+<aside class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="drawer-close" id="closeCart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot"></div>
+</aside>
 
-  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
-
-    ${DB.gymInfo?.instagram ? `
-      <a href="${DB.gymInfo.instagram}"
-        target="_blank"
-        class="btn">
-        📸 Instagram
-      </a>
-    ` : ''}
-
-    ${DB.gymInfo?.facebook ? `
-      <a href="${DB.gymInfo.facebook}"
-        target="_blank"
-        class="btn">
-        📘 Facebook
-      </a>
-    ` : ''}
-
-    ${DB.gymInfo?.tiktok ? `
-      <a href="${DB.gymInfo.tiktok}"
-        target="_blank"
-        class="btn">
-        🎵 TikTok
-      </a>
-    ` : ''}
-
-  </div>
+<div class="modal-overlay" id="productModalOverlay">
+  <div class="modal" id="productModal"></div>
 </div>
-    </div>`;
-}
 
-function triggerPhotoUpload(){document.getElementById('photoInput')?.click()}
-function handlePhoto(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    // Comprimir la imagen antes de guardar (las fotos de celular pesan mucho)
-    const img=new Image();
-    img.onload=()=>{
-      const MAX=400; // px máximo (más que suficiente para un avatar)
-      const scale=Math.min(1,MAX/Math.max(img.width,img.height));
-      const canvas=document.createElement('canvas');
-      canvas.width=Math.round(img.width*scale);
-      canvas.height=Math.round(img.height*scale);
-      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-      const compressed=canvas.toDataURL('image/jpeg',0.75);
-      const m=DB.members.find(x=>x.id===currentUser.memberId);
-      m.photo=compressed;
-      try{
-        saveDB();buildNav();navigate('myprofile');showToast('Foto actualizada ✓','success');
-      } catch(err){
-        showToast('La foto es muy grande, probá con otra','error');
-      }
-    };
-    img.src=e.target.result;
+<div class="modal-overlay" id="checkoutModalOverlay">
+  <div class="modal checkout-modal" id="checkoutModal"></div>
+</div>
+
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+  <span id="toastMsg">Producto agregado</span>
+</div>
+
+<script src="assets/icons.js"></script>
+<script src="assets/products.js"></script>
+<script>
+(function(){
+  "use strict";
+  var Store = window.MiCellStore;
+  var Icons = window.MiCellIcons;
+
+  var state = { categories: [], search: "", sort: "relevance", maxPrice: 60000 };
+
+  var ICON_SVG = {
+    cart: '<path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    star: '<path d="M12 2l3 6.5 7 1-5 5 1.5 7L12 18l-6.5 3.5L7 14.5l-5-5 7-1z" fill="currentColor" stroke="none"/>',
+    eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>'
   };
-  reader.readAsDataURL(file);
-  // Resetear el input para que onchange dispare aunque sea la misma foto
-  input.value='';
-}
 
-function openUserEdit(){
-  const m=DB.members.find(x=>x.id===currentUser.memberId);
-  document.getElementById('ueName').value=m.name;
-  document.getElementById('ueLast').value=m.last;
-  document.getElementById('ueEmail').value=m.email;
-  document.getElementById('uePhone').value=m.phone||'';
-  document.getElementById('ueBirth').value=m.birth||'';
-  const age=calcAgeFrom(m.birth);
-  document.getElementById('ueAge').value=age!==null?`${age} años`:'—';
-  openModal('modalUserEdit');
-}
-function calcAge(){
-  const v=document.getElementById('ueBirth')?.value;
-  const a=calcAgeFrom(v);
-  const el=document.getElementById('ueAge');
-  if(el)el.value=a!==null?`${a} años`:'—';
-}
-function saveUserProfile(){
-  const m=DB.members.find(x=>x.id===currentUser.memberId);
-  m.name=document.getElementById('ueName').value.trim()||m.name;
-  m.last=document.getElementById('ueLast').value.trim()||m.last;
-  m.email=document.getElementById('ueEmail').value.trim()||m.email;
-  m.phone=document.getElementById('uePhone').value.trim();
-  m.birth=document.getElementById('ueBirth').value;
-  saveDB();closeModal('modalUserEdit');buildNav();navigate('myprofile');showToast('Perfil actualizado','success');
-}
+  function money(n){ return "$" + Math.round(n).toLocaleString("es-AR"); }
+  function el(tag, cls, html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
 
-// ════════════════════════════════════════════════════
-// UTILS
-// ════════════════════════════════════════════════════
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-document.querySelectorAll('.modal-ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
+  /* ---------- render: categories ---------- */
+  function renderCategories(){
+    var grid = document.getElementById("catGrid");
+    var listAll = Store.CATEGORIES;
+    var products = Store.getProducts();
+    grid.innerHTML = "";
+    listAll.forEach(function(c){
+      var count = products.filter(function(p){return p.category===c.id;}).length;
+      var card = el("div","cat-card" + (state.categories.indexOf(c.id)>-1 ? " active" : ""));
+      card.innerHTML = '<div class="cat-ic">'+ Icons.svgFor(c.icon,0).replace('<svg ','<svg style="width:22px;height:22px" ') +'</div>'+
+        '<div class="cat-name">'+c.name+'</div><span class="cat-count">'+count+' productos</span>';
+      card.addEventListener("click", function(){
+        toggleCategory(c.id);
+        document.getElementById("catalogo").scrollIntoView({behavior:"smooth"});
+      });
+      grid.appendChild(card);
+    });
+  }
 
-function showToast(msg,type='info'){
-  const icons={success:'✅',error:'❌',info:'ℹ️',warning:'⚠️'};
-  const t=document.createElement('div');
-  t.className='toast';
-  t.innerHTML=`${icons[type]} ${msg}`;
-  document.getElementById('toastWrap').appendChild(t);
-  setTimeout(()=>t.remove(),3000);
-}
+  function renderCatFilterList(){
+    var box = document.getElementById("catFilterList");
+    box.innerHTML = "";
+    Store.CATEGORIES.forEach(function(c){
+      var label = el("label","f-check");
+      var checked = state.categories.indexOf(c.id) > -1;
+      label.innerHTML = '<input type="checkbox" value="'+c.id+'" '+(checked?"checked":"")+'> '+c.name;
+      label.querySelector("input").addEventListener("change", function(e){
+        toggleCategory(c.id, false);
+        renderProducts();
+        renderCategories();
+      });
+      box.appendChild(label);
+    });
+  }
 
-// Scroll behaviors
-const mainEl=document.getElementById('mainContent');
-window.addEventListener('scroll',()=>{
-  document.getElementById('topNav').classList.toggle('scrolled',window.scrollY>10);
-  document.getElementById('backTop').classList.toggle('show',window.scrollY>300);
-},{passive:true});
+  function toggleCategory(id, sync){
+    var idx = state.categories.indexOf(id);
+    if(idx>-1) state.categories.splice(idx,1); else state.categories.push(id);
+    renderCatFilterList();
+    renderProducts();
+    renderCategories();
+  }
 
-// Enter key login
-document.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&document.getElementById('loginScreen').style.display!=='none')doLogin();
-});
-//window.addEventListener("load", () => {
- //   setTimeout(cargarFirebase, 1000);
-//});//
+  /* ---------- render: product card ---------- */
+  function cardHTML(p){
+    var badgeMap = { nuevo:"Nuevo", oferta:"Oferta", "mas-vendido":"Más vendido" };
+    var badge = p.badge ? '<span class="card-badge bdg-'+p.badge+'">'+badgeMap[p.badge]+'</span>' : "";
+    var oldPrice = p.oldPrice ? '<span class="price-old">'+money(p.oldPrice)+'</span>' : "";
+    var lowStock = p.stock<=5 ? '<div class="stock-low">Últimas '+p.stock+' unidades</div>' : "";
+    return (
+      '<div class="card" data-id="'+p.id+'">'+
+        '<div class="card-media">'+badge+Icons.svgFor(Store.categoryById(p.category).icon, p.palette)+
+          '<button class="card-quick" data-quick="'+p.id+'" aria-label="Ver producto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'+ICON_SVG.eye+'</svg></button>'+
+        '</div>'+
+        '<div class="card-body">'+
+          '<span class="card-cat">'+Store.categoryById(p.category).name+'</span>'+
+          '<h3 class="card-name">'+p.name+'</h3>'+
+          '<span class="card-model">'+p.model+'</span>'+
+          '<div class="card-rating"><svg viewBox="0 0 24 24">'+ICON_SVG.star+'</svg> '+p.rating.toFixed(1)+'</div>'+
+          '<div class="card-foot">'+
+            '<div class="card-price"><span class="price-now">'+money(p.price)+'</span>'+oldPrice+'</div>'+
+            '<button class="add-btn" data-add="'+p.id+'" aria-label="Agregar al carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">'+ICON_SVG.plus+'</svg></button>'+
+          '</div>'+lowStock+
+        '</div>'+
+      '</div>'
+    );
+  }
+
+  function getFiltered(){
+    var list = Store.getProducts();
+    if(state.categories.length) list = list.filter(function(p){ return state.categories.indexOf(p.category)>-1; });
+    if(state.search.trim()){
+      var q = state.search.trim().toLowerCase();
+      list = list.filter(function(p){ return (p.name+" "+p.model).toLowerCase().indexOf(q)>-1; });
+    }
+    list = list.filter(function(p){ return p.price <= state.maxPrice; });
+    switch(state.sort){
+      case "price-asc": list = list.slice().sort(function(a,b){return a.price-b.price;}); break;
+      case "price-desc": list = list.slice().sort(function(a,b){return b.price-a.price;}); break;
+      case "rating": list = list.slice().sort(function(a,b){return b.rating-a.rating;}); break;
+      case "new": list = list.slice().sort(function(a,b){return (b.badge==="nuevo")-(a.badge==="nuevo");}); break;
+    }
+    return list;
+  }
+
+  function renderProducts(){
+    var grid = document.getElementById("productGrid");
+    var list = getFiltered();
+    document.getElementById("resultCount").textContent = list.length + (list.length===1?" producto":" productos");
+    document.getElementById("resultCountTop").textContent = "Mostrando " + list.length + " de " + Store.getProducts().length + " productos";
+    if(!list.length){
+      grid.innerHTML = '<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><p>No encontramos productos con esos filtros.</p></div>';
+      return;
+    }
+    grid.innerHTML = list.map(cardHTML).join("");
+    grid.querySelectorAll("[data-add]").forEach(function(btn){
+      btn.addEventListener("click", function(e){ e.stopPropagation(); addToCartUI(btn.getAttribute("data-add"),1); });
+    });
+    grid.querySelectorAll("[data-quick]").forEach(function(btn){
+      btn.addEventListener("click", function(e){ e.stopPropagation(); openProductModal(btn.getAttribute("data-quick")); });
+    });
+    grid.querySelectorAll(".card").forEach(function(card){
+      card.addEventListener("click", function(){ openProductModal(card.getAttribute("data-id")); });
+    });
+  }
+
+  /* ---------- cart ---------- */
+  function updateCartCount(){
+    var n = Store.getCartCount();
+    var el2 = document.getElementById("cartCount");
+    el2.textContent = n;
+    el2.classList.remove("bump"); void el2.offsetWidth; el2.classList.add("bump");
+  }
+
+  function addToCartUI(id, qty){
+    Store.addToCart(id, qty);
+    updateCartCount();
+    var p = Store.getProduct(id);
+    showToast((p?p.name:"Producto") + " agregado al carrito");
+    renderCartDrawer();
+  }
+
+  function renderCartDrawer(){
+    var lines = Store.getCartLines();
+    var body = document.getElementById("cartBody");
+    var foot = document.getElementById("cartFoot");
+    if(!lines.length){
+      body.innerHTML = '<div class="drawer-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/></svg><p>Tu carrito está vacío</p></div>';
+      foot.innerHTML = '<a href="#catalogo" class="btn btn-outline btn-block" id="goShopBtn">Ver productos</a>';
+      var gb = document.getElementById("goShopBtn");
+      if(gb) gb.addEventListener("click", closeCart);
+      return;
+    }
+    body.innerHTML = lines.map(function(l){
+      var p = l.product;
+      return '<div class="cart-line" data-id="'+p.id+'">'+
+        '<div class="cart-line-media">'+Icons.svgFor(Store.categoryById(p.category).icon, p.palette)+'</div>'+
+        '<div class="cart-line-info">'+
+          '<div class="cart-line-name">'+p.name+'</div>'+
+          '<div class="cart-line-model">'+p.model+'</div>'+
+          '<div class="qty-stepper">'+
+            '<button data-step="-1">−</button><span>'+l.qty+'</span><button data-step="1">+</button>'+
+          '</div>'+
+          '<span class="cart-line-remove" data-remove>Quitar</span>'+
+        '</div>'+
+        '<div class="cart-line-price">'+money(l.lineTotal)+'</div>'+
+      '</div>';
+    }).join("");
+
+    body.querySelectorAll(".cart-line").forEach(function(line){
+      var id = line.getAttribute("data-id");
+      line.querySelectorAll("[data-step]").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          var current = Store.getCart().find(function(l){return l.id===id;});
+          var qty = (current?current.qty:0) + parseInt(btn.getAttribute("data-step"),10);
+          Store.setQty(id, qty);
+          updateCartCount(); renderCartDrawer();
+        });
+      });
+      line.querySelector("[data-remove]").addEventListener("click", function(){
+        Store.removeFromCart(id); updateCartCount(); renderCartDrawer();
+      });
+    });
+
+    var total = Store.getCartTotal();
+    foot.innerHTML =
+      '<div class="drawer-row"><span>Subtotal</span><span>'+money(total)+'</span></div>'+
+      '<div class="drawer-row"><span>Envío</span><span>A calcular</span></div>'+
+      '<div class="drawer-total"><span>Total</span><span>'+money(total)+'</span></div>'+
+      '<button class="btn btn-primary btn-block" id="checkoutBtn">Finalizar compra</button>';
+    document.getElementById("checkoutBtn").addEventListener("click", openCheckout);
+  }
+
+  function openCart(){ document.getElementById("cartDrawer").classList.add("open"); document.getElementById("overlay").classList.add("open"); }
+  function closeCart(){ document.getElementById("cartDrawer").classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
+
+  /* ---------- product modal ---------- */
+  function openProductModal(id){
+    var p = Store.getProduct(id);
+    if(!p) return;
+    Store.recordView(id);
+    renderCategories();
+    var c = Store.categoryById(p.category);
+    var modal = document.getElementById("productModal");
+    modal.innerHTML =
+      '<button class="modal-close" id="closeProductModal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>'+
+      '<div class="pd-grid">'+
+        '<div class="pd-media">'+Icons.svgFor(c.icon, p.palette)+'</div>'+
+        '<div class="pd-info">'+
+          '<span class="pd-cat">'+c.name+'</span>'+
+          '<h2 class="pd-name">'+p.name+'</h2>'+
+          '<div class="pd-model">'+p.model+'</div>'+
+          '<div class="pd-price-row"><span class="pd-price">'+money(p.price)+'</span>'+(p.oldPrice?'<span class="price-old">'+money(p.oldPrice)+'</span>':'')+'</div>'+
+          '<p class="pd-desc">'+p.desc+'</p>'+
+          '<div class="pd-meta">'+
+            '<div class="pd-meta-item"><b>'+p.rating.toFixed(1)+' / 5</b>Calificación</div>'+
+            '<div class="pd-meta-item"><b>'+p.stock+' unid.</b>Stock disponible</div>'+
+            '<div class="pd-meta-item"><b>'+c.name+'</b>Categoría</div>'+
+          '</div>'+
+          '<div class="pd-actions">'+
+            '<div class="qty-stepper" id="pdQty" data-qty="1"><button data-pdstep="-1">−</button><span>1</span><button data-pdstep="1">+</button></div>'+
+            '<button class="btn btn-primary" id="pdAddBtn" '+(p.stock<=0?"disabled":"")+'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:15px;height:15px">'+ICON_SVG.plus+'</svg> Agregar al carrito</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    modal.querySelector("#closeProductModal").addEventListener("click", closeProductModal);
+    var qtyBox = modal.querySelector("#pdQty");
+    qtyBox.querySelectorAll("[data-pdstep]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var q = parseInt(qtyBox.getAttribute("data-qty"),10) + parseInt(btn.getAttribute("data-pdstep"),10);
+        if(q<1) q=1;
+        qtyBox.setAttribute("data-qty", q);
+        qtyBox.querySelector("span").textContent = q;
+      });
+    });
+    modal.querySelector("#pdAddBtn").addEventListener("click", function(){
+      var q = parseInt(qtyBox.getAttribute("data-qty"),10);
+      addToCartUI(id, q);
+      closeProductModal();
+    });
+    document.getElementById("productModalOverlay").classList.add("open");
+  }
+  function closeProductModal(){ document.getElementById("productModalOverlay").classList.remove("open"); }
+
+  /* ---------- checkout ---------- */
+  var selectedPay = "efectivo";
+  function openCheckout(){
+    if(!Store.getCartLines().length) return;
+    closeCart();
+    var modal = document.getElementById("checkoutModal");
+    var total = Store.getCartTotal();
+    modal.innerHTML =
+      '<h3>Finalizar compra</h3><p class="sub">Completá tus datos para coordinar el envío o la entrega.</p>'+
+      '<div class="field"><label>Nombre completo</label><input type="text" id="coName" placeholder="Tu nombre" required></div>'+
+      '<div class="field"><label>Teléfono</label><input type="tel" id="coPhone" placeholder="Ej: 261 555 5555" required></div>'+
+      '<div class="field"><label>Dirección de envío</label><input type="text" id="coAddress" placeholder="Calle, número, ciudad" required></div>'+
+      '<div class="field"><label>Forma de pago</label>'+
+        '<div class="pay-options">'+
+          '<div class="pay-opt active" data-pay="efectivo">Efectivo</div>'+
+          '<div class="pay-opt" data-pay="transferencia">Transferencia</div>'+
+          '<div class="pay-opt" data-pay="tarjeta">Tarjeta</div>'+
+        '</div>'+
+      '</div>'+
+      '<div class="order-summary">'+
+        '<div class="row"><span>Productos ('+Store.getCartCount()+')</span><span>'+money(total)+'</span></div>'+
+        '<div class="row"><span>Envío</span><span>A coordinar</span></div>'+
+        '<div class="row total"><span>Total</span><span>'+money(total)+'</span></div>'+
+      '</div>'+
+      '<button class="btn btn-primary btn-block" id="confirmOrderBtn">Confirmar pedido</button>';
+    selectedPay = "efectivo";
+    modal.querySelectorAll(".pay-opt").forEach(function(opt){
+      opt.addEventListener("click", function(){
+        modal.querySelectorAll(".pay-opt").forEach(function(o){o.classList.remove("active");});
+        opt.classList.add("active");
+        selectedPay = opt.getAttribute("data-pay");
+      });
+    });
+    modal.querySelector("#confirmOrderBtn").addEventListener("click", function(){
+      var name = modal.querySelector("#coName").value.trim();
+      var phone = modal.querySelector("#coPhone").value.trim();
+      var address = modal.querySelector("#coAddress").value.trim();
+      if(!name || !phone || !address){ showToast("Completá todos los campos"); return; }
+      var lines = Store.getCartLines();
+      var order = {
+        customer:{name:name, phone:phone, address:address},
+        payment: selectedPay,
+        items: lines.map(function(l){ return {id:l.product.id, name:l.product.name, qty:l.qty, price:l.product.price}; }),
+        total: total
+      };
+      Store.addOrder(order);
+      Store.clearCart();
+      updateCartCount();
+      renderProducts();
+      renderSuccess(order);
+    });
+    document.getElementById("checkoutModalOverlay").classList.add("open");
+  }
+  function closeCheckout(){ document.getElementById("checkoutModalOverlay").classList.remove("open"); }
+
+  function renderSuccess(order){
+    var modal = document.getElementById("checkoutModal");
+    var waText = encodeURIComponent("Hola! Quiero confirmar mi pedido #"+order.id+" por "+money(order.total)+". Items: " + order.items.map(function(i){return i.qty+"x "+i.name;}).join(", "));
+    modal.innerHTML =
+      '<div class="success-box">'+
+        '<div class="success-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>'+
+        '<h3>¡Pedido confirmado!</h3>'+
+        '<p class="sub">Tu pedido #'+order.id+' fue registrado. Te contactaremos para coordinar el envío.</p>'+
+        '<a class="btn btn-primary btn-block" href="https://wa.me/5493815672947?text='+waText+'" target="_blank" rel="noopener">Avisar por WhatsApp</a>'+
+        '<button class="btn btn-outline btn-block" id="closeSuccessBtn" style="margin-top:10px">Seguir comprando</button>'+
+      '</div>';
+    modal.querySelector("#closeSuccessBtn").addEventListener("click", closeCheckout);
+  }
+
+  /* ---------- toast ---------- */
+  var toastTimer;
+  function showToast(msg){
+    var t = document.getElementById("toast");
+    document.getElementById("toastMsg").textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2400);
+  }
+
+  /* ---------- scroll reveal ---------- */
+  function setupReveal(){
+    var items = document.querySelectorAll(".reveal");
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); obs.unobserve(e.target); } });
+    }, {threshold:.12});
+    items.forEach(function(i){ obs.observe(i); });
+  }
+
+  /* ---------- header scroll ---------- */
+  window.addEventListener("scroll", function(){
+    document.getElementById("siteHeader").classList.toggle("scrolled", window.scrollY > 8);
+  });
+
+  /* ---------- init ---------- */
+  function init(){
+    document.getElementById("fcIc1").innerHTML = Icons.svgFor("headphones", 0);
+    document.getElementById("fcIc2").innerHTML = Icons.svgFor("plug", 1);
+    document.getElementById("fcIc3").innerHTML = Icons.svgFor("case", 3);
+
+    renderCategories();
+    renderCatFilterList();
+    renderProducts();
+    renderCartDrawer();
+    updateCartCount();
+    setupReveal();
+
+    document.getElementById("cartToggle").addEventListener("click", openCart);
+    document.getElementById("closeCart").addEventListener("click", closeCart);
+    document.getElementById("overlay").addEventListener("click", function(){ closeCart(); closeMobile(); });
+    document.getElementById("productModalOverlay").addEventListener("click", function(e){ if(e.target===this) closeProductModal(); });
+    document.getElementById("checkoutModalOverlay").addEventListener("click", function(e){ if(e.target===this) closeCheckout(); });
+
+    document.getElementById("searchInput").addEventListener("input", function(e){ state.search = e.target.value; renderProducts(); });
+    document.getElementById("sortSelect").addEventListener("change", function(e){ state.sort = e.target.value; renderProducts(); });
+    document.getElementById("priceRange").addEventListener("input", function(e){
+      state.maxPrice = parseInt(e.target.value,10);
+      document.getElementById("priceMaxLabel").textContent = money(state.maxPrice);
+      renderProducts();
+    });
+    document.getElementById("filterToggleBtn").addEventListener("click", function(){
+      document.getElementById("filtersPanel").classList.toggle("open");
+    });
+    document.getElementById("clearFilters").addEventListener("click", function(){
+      state.categories = []; state.maxPrice = 60000; state.search="";
+      document.getElementById("searchInput").value="";
+      document.getElementById("priceRange").value=60000;
+      document.getElementById("priceMaxLabel").textContent = money(60000);
+      renderCatFilterList(); renderProducts(); renderCategories();
+    });
+
+    var mobileDrawer = document.getElementById("mobileDrawer");
+    function closeMobile(){ mobileDrawer.classList.remove("open"); document.getElementById("overlay").classList.remove("open"); }
+    document.getElementById("hamburgerBtn").addEventListener("click", function(){
+      mobileDrawer.classList.add("open"); document.getElementById("overlay").classList.add("open");
+    });
+    mobileDrawer.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", closeMobile); });
+
+    document.getElementById("searchToggle").addEventListener("click", function(){
+      document.getElementById("catalogo").scrollIntoView({behavior:"smooth"});
+      setTimeout(function(){ document.getElementById("searchInput").focus(); }, 400);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
 </script>
 </body>
 </html>
