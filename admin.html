@@ -622,6 +622,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     var p = editing ? Store.getProduct(id) : { name:"", model:"", category:Store.CATEGORIES[0].id, price:0, oldPrice:"", stock:0, badge:"", rating:4.5, palette:0, desc:"" };
     var box = document.getElementById("productModalBox");
     var pendingImage = p.image || null;
+    var pendingImageFile = null;
     box.innerHTML =
       '<h3>'+(editing?"Editar producto":"Nuevo producto")+'</h3>'+
       '<div class="field"><label>Foto del producto</label>'+
@@ -656,6 +657,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     box.querySelector("#fImageInput").addEventListener("change", function(e){
       var file = e.target.files[0];
       if(!file) return;
+      pendingImageFile = file;
       var reader = new FileReader();
       reader.onload = function(){
         pendingImage = reader.result;
@@ -666,6 +668,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     });
     box.querySelector("#fImageRemove").addEventListener("click", function(){
       pendingImage = null;
+      pendingImageFile = null;
       box.querySelector("#fImagePreview").innerHTML = "";
       box.querySelector("#fImageInput").value = "";
       box.querySelector("#fImageRemove").style.display = "none";
@@ -673,6 +676,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
     box.querySelector("#saveProductBtn").addEventListener("click", function(){
       var name = box.querySelector("#fName").value.trim();
       if(!name){ box.querySelector("#fName").style.borderColor = "var(--red)"; return; }
+      var saveBtn = box.querySelector("#saveProductBtn");
       var patch = {
         name: name,
         model: box.querySelector("#fModel").value.trim(),
@@ -683,13 +687,26 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
         badge: box.querySelector("#fBadge").value || null,
         desc: box.querySelector("#fDesc").value.trim(),
         rating: p.rating || 4.5,
-        palette: p.palette != null ? p.palette : Math.floor(Math.random()*5),
-        image: pendingImage
+        palette: p.palette != null ? p.palette : Math.floor(Math.random()*5)
       };
-      if(editing) Store.updateProduct(id, patch); else Store.addProduct(patch);
-      closeProductModal();
-      renderProductsTable();
-      renderDashboard();
+      function finishSave(finalImage){
+        patch.image = finalImage;
+        if(editing) Store.updateProduct(id, patch); else Store.addProduct(patch);
+        closeProductModal();
+        renderProductsTable();
+        renderDashboard();
+      }
+      if(pendingImageFile){
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Subiendo foto...";
+        Store.uploadProductImage(pendingImageFile).then(function(url){
+          finishSave(url || pendingImage);
+        }).catch(function(){
+          finishSave(pendingImage);
+        });
+      } else {
+        finishSave(pendingImage);
+      }
     });
     document.getElementById("productModalOverlay").classList.add("open");
   }
@@ -758,7 +775,7 @@ tbody tr:hover{background:rgba(255,255,255,.02)}
 
   /* ---------- init ---------- */
   fillCategoryFilter();
-  renderDashboard();
+  Store.ready().then(renderDashboard);
 })();
 </script>
 </body>

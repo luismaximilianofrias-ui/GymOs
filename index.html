@@ -629,8 +629,8 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
   var Store = window.MiCellStore;
   var Icons = window.MiCellIcons;
 
-  var settings = Store.getSettings();
-  var state = { categories: [], search: "", sort: "relevance", maxPrice: settings.priceFilterMax };
+  var settings = null;
+  var state = { categories: [], search: "", sort: "relevance", maxPrice: 60000 };
 
   var ICON_SVG = {
     cart: '<path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>',
@@ -965,6 +965,9 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
 
   /* ---------- init ---------- */
   function init(){
+    settings = Store.getSettings();
+    state.maxPrice = settings.priceFilterMax;
+
     document.getElementById("fcIc1").innerHTML = Icons.svgFor("headphones", 0);
     document.getElementById("fcIc2").innerHTML = Icons.svgFor("plug", 1);
     document.getElementById("fcIc3").innerHTML = Icons.svgFor("case", 3);
@@ -1020,7 +1023,7 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
     });
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", function(){ Store.ready().then(init); });
 })();
 </script>
 </body>
