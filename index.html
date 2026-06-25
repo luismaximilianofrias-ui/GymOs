@@ -516,7 +516,7 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
         <h4>Precio máximo</h4>
         <div class="f-group">
           <input type="range" class="price-range" id="priceRange" min="4000" max="60000" step="1000" value="60000">
-          <div class="price-vals"><span>$4.000</span><span id="priceMaxLabel">$60.000</span></div>
+          <div class="price-vals"><span id="priceMinLabel">$4.000</span><span id="priceMaxLabel">$60.000</span></div>
         </div>
         <span class="f-clear" id="clearFilters">Limpiar filtros</span>
       </aside>
@@ -629,7 +629,8 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
   var Store = window.MiCellStore;
   var Icons = window.MiCellIcons;
 
-  var state = { categories: [], search: "", sort: "relevance", maxPrice: 60000 };
+  var settings = Store.getSettings();
+  var state = { categories: [], search: "", sort: "relevance", maxPrice: settings.priceFilterMax };
 
   var ICON_SVG = {
     cart: '<path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 2H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/>',
@@ -968,6 +969,13 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
     document.getElementById("fcIc2").innerHTML = Icons.svgFor("plug", 1);
     document.getElementById("fcIc3").innerHTML = Icons.svgFor("case", 3);
 
+    var priceRangeEl = document.getElementById("priceRange");
+    priceRangeEl.min = settings.priceFilterMin;
+    priceRangeEl.max = settings.priceFilterMax;
+    priceRangeEl.value = settings.priceFilterMax;
+    document.getElementById("priceMinLabel").textContent = money(settings.priceFilterMin);
+    document.getElementById("priceMaxLabel").textContent = money(settings.priceFilterMax);
+
     renderCategories();
     renderCatFilterList();
     renderProducts();
@@ -992,10 +1000,10 @@ footer{background:var(--ink);color:#fff;padding:64px 0 28px;margin-top:40px}
       document.getElementById("filtersPanel").classList.toggle("open");
     });
     document.getElementById("clearFilters").addEventListener("click", function(){
-      state.categories = []; state.maxPrice = 60000; state.search="";
+      state.categories = []; state.maxPrice = settings.priceFilterMax; state.search="";
       document.getElementById("searchInput").value="";
-      document.getElementById("priceRange").value=60000;
-      document.getElementById("priceMaxLabel").textContent = money(60000);
+      document.getElementById("priceRange").value = settings.priceFilterMax;
+      document.getElementById("priceMaxLabel").textContent = money(settings.priceFilterMax);
       renderCatFilterList(); renderProducts(); renderCategories();
     });
 
