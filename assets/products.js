@@ -14,8 +14,8 @@
   /* ---------- Supabase (base de datos compartida) ---------- */
   /* Completar con los datos del proyecto de Supabase para activar la base de datos.
      Si quedan vacíos, la tienda sigue funcionando con localStorage como antes. */
-  var SUPABASE_URL = "";
-  var SUPABASE_ANON_KEY = "";
+  var SUPABASE_URL = "https://xzmsqduqdhdthzvcwoic.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_h_qIPL8O94grcy8hwntzMQ_niefQYkO";
   var SUPABASE_ENABLED = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
 
   function sbHeaders(extra) {
